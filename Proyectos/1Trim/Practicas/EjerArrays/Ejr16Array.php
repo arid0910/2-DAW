@@ -13,7 +13,7 @@
         foreach ($numeros as $key => $value) {
             echo "<p>".$value."</p>";
         }
-
+ 
         echo "<h3>Numero de elementos</h3>";
         echo "<p>".count($numeros)."</p>";
 
