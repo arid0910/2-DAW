@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 5</title>
+</head>
+<body>
+    <span id="texto1" onmouseover="mouseOver()">ONMOUSEOVER</span> </body> </br>
+    <span id="texto2" onmouseout="mouseOut()">ONMOUSEOUT</span> </br>
+    <span>Introduce tu nombre: </span><input type="text" id="texto3" onblur="onBlur()">
+
+    <script>
+        function mouseOver(){
+            document.getElementById("texto1").style.color = "blue"
+        }
+
+        function mouseOut(){
+            document.getElementById("texto2").style.color = "green"
+        }
+
+        function onBlur(){
+            let upper = document.getElementById("texto3");
+            upper.value = upper.value.toUpperCase();
+        }
+    </script>
+</body>
+</html>
