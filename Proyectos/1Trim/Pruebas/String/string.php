@@ -23,7 +23,7 @@
 
         //implode() pasa un array a string
 
-        //str_word_count cuenta las palbras
+        //str_word_count cuenta las palabras
 
         //trim quitar todo de un texto (tabuladores, caracteres especiales...)
     
