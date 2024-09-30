@@ -18,9 +18,9 @@
     }
 
     
-    if(isset($_POST["comen"])){
-        echo "<p><strong>El comentario enviado a sido: </strong>".$_POST["comen"]."</p>";
+    if (isset($_POST["comen"]) && !empty($_POST["comen"])) {
+        echo "<p><strong>El comentario enviado ha sido: </strong>".$_POST["comen"]."</p>";
     } else {
-        echo "No has hecho ningun comentario.";    
+        echo "<p>No has hecho ningún comentario.</p>";
     }
-    
+?>
