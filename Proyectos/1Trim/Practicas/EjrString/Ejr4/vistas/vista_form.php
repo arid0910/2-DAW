@@ -41,11 +41,11 @@
 </head>
 <body>
     <div id="azul">
-        <h2>Frases palíndromas - Formulario</h2>
+        <h2>Romanos a árabes - Formulario</h2>
         <form action="index.php" method="post" enctype="multipart/form-data">
-            <p>Dime una frase y te diré si es un palíndromo.</p>
+            <p>Dime una número en romano y lo convertiré a cifras árabes.</p>
 
-            <label for="txt1">Frase: </label>
+            <label for="txt1">Número: </label>
             <input type="text" name="txt1" id="txt1"
             value="<?php if(isset($txt1)) echo $txt1 ?>">
 
@@ -53,11 +53,9 @@
                 if(isset($txt1) && $error_form){
                     if($txt1 == ""){
                         echo "<span class='error'>Campo vacio</span>";
-                    }  elseif($l_txt1<3){
-                        echo "<span class='error'>Introduce mas de 3 caracteres</span>";
-                    } else {
-                        echo "<span class='error'>Debes teclear solo letras o espacios</span>";
-                    }
+                    }  else {
+                        echo "<span class='error'>Solo introduce número romanos</span>";
+                    } 
                 }
             ?>
 
