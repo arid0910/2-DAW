@@ -8,6 +8,27 @@
         return $todo_le;
     }
 
+    function quitar_esp($txt){
+        $cadena = "";
+        for ($i=0; $i < strlen($txt); $i++) { 
+            if ($txt[i] != " ") {
+                $cadena.=$txt[$i];
+            }
+        }
+    }
+
+    function letra2($txt){
+        $txt_sin_esp = quitar_esp($txt);
+        $todo_l = true;
+        for ($i=0;$i < strlen($txt); $i++){ 
+            if(ord($txt[$i])<ord("A") || ord($txt[$i])>ord("z")){
+                $todo_l = false;
+                break;
+            }
+        }
+        return $todo_l;
+    }
+
     if(isset($_POST["btnComp"])){
         $txt1=trim($_POST["txt1"]);
         $sin_esp = str_replace(" ", "", $txt1);
@@ -15,7 +36,7 @@
 
         $error_form = $txt1 == "" || $l_txt1 < 3 || !letra($txt1);
     }
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

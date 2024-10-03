@@ -13,12 +13,12 @@
                 break;
             } 
             $i++; $j--;
-        }
+        } 
 
         if($resultado){
-            echo "<p>".$txt1." es una frase palíndroma</p>";
+            echo "<p>La frase ".$txt1." es una frase palíndroma</p>";
         } else {
-            echo "<p>".$txt1." no una frase palíndroma</p>";
+            echo "<p>La frase ".$txt1." no una frase palíndroma</p>";
         }
     
     ?>

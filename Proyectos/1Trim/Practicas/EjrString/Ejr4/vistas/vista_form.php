@@ -49,12 +49,12 @@
             <input type="text" name="txt1" id="txt1"
             value="<?php if(isset($txt1)) echo $txt1 ?>">
 
-            <?php 
+            <?php  
                 if(isset($txt1) && $error_form){
                     if($txt1 == ""){
                         echo "<span class='error'>Campo vacio</span>";
                     }  else {
-                        echo "<span class='error'>Solo introduce número romanos</span>";
+                        echo "<span class='error'>No has introducido un número romano en notación antigia correctamente</span>";
                     } 
                 }
             ?>
@@ -64,4 +64,4 @@
         </form>
     </div>
 </body>
-</html>
+</html> 

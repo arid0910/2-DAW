@@ -38,7 +38,7 @@
             margin-bottom:0.5em;
         }
     </style>    
-</head>
+</head> 
 <body>
     <div id="azul">
         <h2>Frases palíndromas - Formulario</h2>
