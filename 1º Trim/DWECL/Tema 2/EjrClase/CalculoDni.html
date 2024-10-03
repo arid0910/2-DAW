@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculo letra dni</title>
+    <title>Cálculo letra DNI</title>
 </head>
+
 <body>
-    <input type="text" name="dni" id="dni" onblur="calculo()">
+    <input type="text" name="dni" id="dni" onblur="calculo()" maxlength="9">
     <label for="dni" id="lbldni"></label>
 
     <script>
-        var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
-        let dni = document.getElementById("dni").value;
-        let dniNum = 0;
-        let ultimaLetra = dni[dni.length - 1].toUpperCase();
+        function calculo() {
+            var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
 
-        for (let i = 0; i < dni.length; i++) {
-            if(!isNaN(dni[i])){
-                dniNum += dni[i];
+            let dni = document.getElementById("dni").value;
+            let dniNum = parseInt(dni.substring(0, dni.length - 1)); // Tomar solo los 8 primeros caracteres numéricos
+            let ultimaLetra = dni[dni.length - 1].toUpperCase(); // Última letra ingresada
+
+            // Validar que el formato es correcto
+            if (isNaN(dniNum) || dni.length != 9) {
+                document.getElementById("lbldni").innerHTML = "DNI inválido";
+                return;
+            }
+
+            // Calcular la letra correcta
+            let calcular = dniNum % 23;
+            let letraDniCorrecto = letras[calcular];
+
+            // Comparar la letra ingresada con la calculada
+            if (ultimaLetra === letraDniCorrecto) {
+                document.getElementById("lbldni").innerHTML = "DNI correcto";
+            } else {
+                document.getElementById("lbldni").innerHTML = "DNI incorrecto";
             }
         }
-
-        if(dniNum < 9 || dni.length != 9){
-            document.getElementById("lbldni").innerHTML = "DNI invalido";
-            return;
-        }
-
-        let calcular = dniNum % 23;
-        let letraDniCorrecto = letras[dniNum];
-
-        if(ultimaLetra === letraDniCorrecto){
-            document.getElementById("lbldni").innerHTML = "DNI correcto";
-        } else {
-            document.getElementById("lbldni").innerHTML = "DNI incorrecto";
-        }
-
     </script>
 </body>
+
 </html>
