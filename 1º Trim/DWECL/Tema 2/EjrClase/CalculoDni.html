@@ -16,20 +16,17 @@
             var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
 
             let dni = document.getElementById("dni").value;
-            let dniNum = parseInt(dni.substring(0, dni.length - 1)); // Tomar solo los 8 primeros caracteres numéricos
-            let ultimaLetra = dni[dni.length - 1].toUpperCase(); // Última letra ingresada
+            let dniNum = parseInt(dni.substring(0, dni.length - 1)); 
+            let ultimaLetra = dni[dni.length - 1].toUpperCase(); 
 
-            // Validar que el formato es correcto
             if (isNaN(dniNum) || dni.length != 9) {
                 document.getElementById("lbldni").innerHTML = "DNI inválido";
                 return;
             }
 
-            // Calcular la letra correcta
             let calcular = dniNum % 23;
             let letraDniCorrecto = letras[calcular];
 
-            // Comparar la letra ingresada con la calculada
             if (ultimaLetra === letraDniCorrecto) {
                 document.getElementById("lbldni").innerHTML = "DNI correcto";
             } else {
