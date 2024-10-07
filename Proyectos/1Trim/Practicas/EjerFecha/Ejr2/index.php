@@ -1,25 +1,5 @@
 <?php
-    function lenght($fecha) {
-        return strlen($fecha) === 10;
-    }
-
-    function separadores($fecha) {
-        $valido = true;
-
-        if (substr($fecha, 2, 1) !== "/" || substr($fecha, 5, 1) !== "/") {
-            $valido = false;
-        }
-        
-        return $valido;
-    }
-
-    function numeros($fecha){
-        return is_numeric(substr($fecha, 3, 2)) && is_numeric(substr($fecha, 0, 2)) && is_numeric(substr($fecha, 6, 4));
-    }
-
-    function check ($fecha){
-        return checkdate(substr($fecha, 3, 2), substr($fecha, 0, 2),substr($fecha, 6, 4));
-    }
+   
 
     if (isset($_POST["btnCalc"])) {
         $fecha1 = trim($_POST["fecha1"]);
