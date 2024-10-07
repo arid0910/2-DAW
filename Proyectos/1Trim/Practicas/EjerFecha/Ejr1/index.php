@@ -1,35 +1,36 @@
 <?php
-    function fechalenght_valida($fecha){
-        $valido = true;
-
-        if(!strlen($fecha) !== 10){
-           $valido = false;
-        } 
-        return $valido;
+    function lenght($fecha) {
+        return strlen($fecha) === 10;
     }
 
-    function fechaformato_valida($fecha){
+    function separadores($fecha) {
         $valido = true;
 
-        if(substr($fecha,2,1) !== "/" && substr($fecha,5,1) !== "/"){
-            $valido = false;
-        } 
-        if (!checkdate((substr($fecha,3,2)), substr($fecha,0,2), substr($fecha,6,4))){
+        if (substr($fecha, 2, 1) !== "/" || substr($fecha, 5, 1) !== "/") {
             $valido = false;
         }
-
+        
         return $valido;
     }
 
-   if(isset($_POST["btnCalc"])){
-    $fecha1 = trim($_POST["fecha1"]);
-    $fecha2 = trim($_POST["fecha2"]);
+    function numeros($fecha){
+        return is_numeric(substr($fecha, 3, 2)) && is_numeric(substr($fecha, 0, 2)) && is_numeric(substr($fecha, 6, 4));
+    }
 
-    $error_fecha1 =  !fechalenght_valida($fecha1) || !fechaformato_valida($fecha1);
-    $error_fecha2 =  !fechalenght_valida($fecha2) || !fechaformato_valida($fecha2);
-    $error_form = $fecha1 == "" || $fecha2 == "" || $error_fecha1 || $error_fecha2;
-   }
-?> 
+    function check ($fecha){
+        return checkdate(substr($fecha, 3, 2), substr($fecha, 0, 2),substr($fecha, 6, 4));
+    }
+
+    if (isset($_POST["btnCalc"])) {
+        $fecha1 = trim($_POST["fecha1"]);
+        $fecha2 = trim($_POST["fecha2"]);
+
+        $error_fecha1 = !lenght($fecha1) || !separadores($fecha1) || !numeros($fecha1) || !check($fecha1);
+        $error_fecha2 = !lenght($fecha2) || !separadores($fecha2) || !numeros($fecha2) || !check($fecha2);
+
+        $error_form = $fecha1 == "" || $fecha2 == "" || $error_fecha1 || $error_fecha2;
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">

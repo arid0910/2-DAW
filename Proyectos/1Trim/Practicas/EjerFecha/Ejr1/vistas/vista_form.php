@@ -49,31 +49,27 @@
                 value="<?php if(isset($fecha1)) echo $fecha1 ?>"> </br>
 
                 <?php
-                    if(isset($fecha1) && $error_form){
-                        if($fecha1 == ""){
-                            echo "<p class='error'>*No pudes dejar campos vacio*</p>";
-                        } else if (!fechalenght_valida($fecha1)) {
-                            echo "<p class='error'>*Formato de fecha erronea*</p>";
+                    if (isset($fecha1) && $error_fecha1) {
+                        if ($fecha1 == "") {
+                            echo "<p class='error'>*No puedes dejar el campo vacío*</p>";
                         } else {
-                            echo "<p class='error'>*Formato de fecha erronea*</p>";
+                            echo "<p class='error'>*Formato de fecha erróneo*</p>";
                         }
-                    }  
+                    }
                 ?>
 
                 <label for="fecha2">Introduzca una fecha: (DD/MM/YYYY): </label>
                 <input type="text" name="fecha2" id="fecha2"
-                value="<?php if(isset($fecha2)) echo $fecha2 ?>">
+                    value="<?php if (isset($fecha2)) echo $fecha2; ?>">
 
                 <?php
-                    if(isset($fecha2) && $error_form){
-                        if($fecha2 == ""){
-                            echo "<p class='error'>*No pudes dejar campos vacio*</p>";
-                        } else if (!fechalenght_valida($fecha2)) {
-                            echo "<p class='error'>*Formato de fecha erronea*</p>";
+                    if (isset($fecha2) && $error_fecha2) {
+                        if ($fecha2 == "") {
+                            echo "<p class='error'>*No puedes dejar el campo vacío*</p>";
                         } else {
-                            echo "<p class='error'>*Formato de fecha erronea*</p>";
+                            echo "<p class='error'>*Formato de fecha erróneo*</p>";
                         }
-                    }  
+                    }
                 ?>
 
                 </br> </br> 
