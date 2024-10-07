@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 5</title>
+    <title>Fecha 2</title>
     <style>
         h2{
             text-align:center;
@@ -34,35 +34,47 @@
             background-color:lightgreen;
         }
 
-        #txt1, #txt2{
+        #fecha1, #fecha2{
             margin-bottom:0.5em;
         }
     </style>    
 </head>
 <body>
     <div id="azul">
-        <h2>Àrabes a romanos - Formulario</h2>
+        <h2>Fechas - Formulario</h2>
         <form action="index.php" method="post" enctype="multipart/form-data">
-            <p>Dime una número y lo convertiré a números romanos.</p>
+            <p>
+                <label for="fecha1">Introduzca una fecha: (DD/MM/YYYY): </label>
+                <input type="text" name="fecha1" id="fecha1"
+                value="<?php if(isset($fecha1)) echo $fecha1 ?>"> </br>
 
-            <label for="txt1">Número: </label>
-            <input type="text" name="txt1" id="txt1"
-            value="<?php if(isset($txt1)) echo $txt1 ?>">
+                <?php
+                    if (isset($fecha1) && $error_fecha1) {
+                        if ($fecha1 == "") {
+                            echo "<p class='error'>*No puedes dejar el campo vacío*</p>";
+                        } else {
+                            echo "<p class='error'>*Formato de fecha erróneo*</p>";
+                        }
+                    }
+                ?>
 
-            <?php  
-                if(isset($txt1) && $error_form){
-                    if($txt1 == ""){
-                        echo "<span class='error'>Campo vacio</span>";
-                    } else if ((int)$txt1 > 5001) {
-                        echo "<span class='error'>Itroduce un numero menor o igual a 5000</span>";
-                    } else {
-                        echo "<span class='error'>Itroduce solo números</span>";
-                    } 
-                }
-            ?>
+                <label for="fecha2">Introduzca una fecha: (DD/MM/YYYY): </label>
+                <input type="text" name="fecha2" id="fecha2"
+                    value="<?php if (isset($fecha2)) echo $fecha2; ?>">
 
-            </br> 
-            <button type="submit" name="btnComp">Comprobar</button>
+                <?php
+                    if (isset($fecha2) && $error_fecha2) {
+                        if ($fecha2 == "") {
+                            echo "<p class='error'>*No puedes dejar el campo vacío*</p>";
+                        } else {
+                            echo "<p class='error'>*Formato de fecha erróneo*</p>";
+                        }
+                    }
+                ?>
+
+                </br> </br> 
+                <button type="submit" name="btnCalc">Calcular</button>
+            </p>
         </form>
     </div>
 </body>
