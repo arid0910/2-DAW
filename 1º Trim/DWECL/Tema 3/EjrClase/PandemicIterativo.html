@@ -23,7 +23,7 @@
         function pandemic(array, x, y) {
             let flag = 1;
 
-            while (flag) {
+            while (flag = 1) {
                 flag = 0;
                 let infectado = array[x][y]; //pos infectado
                 let fila = array.length;
@@ -32,21 +32,25 @@
                 //Ariba
                 if (x - 1 >= 0 && array[x - 1][y] === infectado) {
                     array[x-1][y] == "";
+                    flag = 1;
                 }
 
                 //Abajo
                 if (x + 1 < fila && array[x + 1][y] === infectado) {
                     array[x + 1][y] == "";
+                    flag = 1;
                 }
 
                 //Izquierda
                 if (y - 1 >= 0 && array[x][y - 1] === infectado) {
                     array[x][y - 1] == "";
+                    flag = 1;
                 }
 
                 //Derecha
                 if (y + 1 < columna && array[x][y + 1] === infectado) {
                     array[x][y + 1] == "";
+                    flag = 1;
                 }
             }
         }
