@@ -17,8 +17,37 @@
             pandemic(biocenosis, 4, 2);
             console.log(biocenosis);
 
-            function pandemic(mtx,x, y) {
+            function pandemic(array,x, y) {
                 
+                let infectado = array[x][y]; //pos infectado
+                let fila = array.length;
+                let columna = array[0].length;
+                
+                //que no se salga
+                if(x < 0 || x >= fila || y < 0 || y >= columna){
+                    return;
+                }
+
+                //si esta vacio o no es de la misma especie
+                if(array[x][y] == "" || array[x][y] !== infectado){
+                    return;
+                }
+
+                //Dejar celda infectada vacia
+                array[x][y] = "";
+
+                if (x - 1 >= 0 && array[x - 1][y] === infectado){
+                    pandemic(array, x - 1, y); // Arriba
+                } 
+                if (x + 1 < fila && array[x + 1][y] === infectado){
+                    pandemic(array, x + 1, y); // Abajo
+                } 
+                if (y - 1 >= 0 && array[x][y - 1] === infectado){
+                    pandemic(array, x, y - 1); // Izquierda
+                } 
+                if (y + 1 < columna && array[x][y + 1] === infectado){
+                    pandemic(array, x, y + 1); // Derecha
+                } 
             }
         </script>
 </body>
