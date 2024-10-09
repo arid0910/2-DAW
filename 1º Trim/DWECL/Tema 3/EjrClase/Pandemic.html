@@ -11,11 +11,17 @@
                               ['P', 'G', 'R', 'H', 'H', 'G'], 
                               ['G', 'R', 'R', 'H', 'G', 'G'], 
                               ['R', 'R', 'H', 'H', 'G', 'P']];
-
-            console.log(biocenosis);
+            let biocenosis2 = [['P', 'P', 'G', 'H', 'H', 'R'], 
+                              ['P', 'P', 'G', 'H', 'H', 'G'], 
+                              ['P', 'G', 'R', 'H', 'H', 'G'], 
+                              ['G', 'R', 'R', 'H', 'G', 'G'], 
+                              ['R', 'R', 'H', 'H', 'G', 'P']];
+  
             pandemic(biocenosis, 0, 0);
-            pandemic(biocenosis, 4, 2);
             console.log(biocenosis);
+            
+            pandemic(biocenosis2, 4, 2);
+            console.log(biocenosis2);
 
             function pandemic(array,x, y) {
                 
