@@ -7,9 +7,9 @@
 </head>
 <body>
     <h1>Teoria subir ficheros</h1>
-    <form action="index.php" method="post" enctype="multipart/form-data">
+    <form action="index_req.php" method="post" enctype="multipart/form-data">
         <p>
-            <label for="foto">Seleccione un archivo imagen (Máx 500KB): </label>
+            <label for="foto">Seleccione un archivo imagen con extensión(Máx 500KB): </label>
             <input type="file" name="foto" id="foto" accept="image/*"/>
         </p>
         <p>
@@ -21,9 +21,9 @@
     //Con files no se usa $_POST se usa $_FILES
     if (isset($_FILES["foto"])) {
         if ($_FILES["foto"]["error"] == 0) {
-            echo "Has seleccionado un archivo"
+            echo "Se ha subido con exito";
         } else {
-            echo "No se a subido con exito"
+            echo "No se ha subido con exito";
         }
     }
 ?>
