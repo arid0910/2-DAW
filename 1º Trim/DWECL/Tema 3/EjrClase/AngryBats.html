@@ -7,57 +7,53 @@
 </head>
 <body>
     <script>
-        let biocenosis = [['P', 'P', 'G', 'H', 'H', 'R'], 
+        let AngryBats =  [['P', 'P', 'G', 'H', 'H', 'R'], 
                           ['P', 'P', 'G', 'H', 'H', 'G'], 
                           ['P', 'G', 'M', 'H', 'H', 'G'], 
                           ['G', 'R', 'M', 'H', 'G', 'G'], 
                           ['R', 'R', 'H', 'H', 'G', 'P']];
-
-        let biocenosis2 = [['P', 'P', 'G', 'H', 'H', 'R'], 
-                          ['P', 'P', 'G', 'H', 'H', 'G'], 
-                          ['P', 'G', 'M', 'H', 'H', 'G'], 
-                          ['G', 'R', 'M', 'H', 'G', 'G'], 
-                          ['R', 'R', 'H', 'H', 'G', 'P']];
-
-        pandemic(biocenosis, 0, 0);
-        console.log(biocenosis);
-
-        pandemic(biocenosis2, 4, 2);
-        console.log(biocenosis2);
-
-        function pandemic(array,x, y) {
-            
-            let infectado = array[x][y]; //pos infectado
-            let fila = array.length;
-            let columna = array[0].length;
+    
+        
+        infectar(AngryBats, 12, 2); 
+        console.log(AngryBats);
+    
+        function infectar(array,x, y) {
             
             //que no se salga
-            if(x < 0 || x >= fila || y < 0 || y >= columna){
+            if(x < 0 || x >= array.length || y < 0 || y >= array[y].length){
                 return;
             }
-
-            //si esta vacio o no es de la misma especie
-            if(array[x][y] == "" || array[x][y] !== infectado){
+    
+            //si esta vacio o no es un murcielago
+            if(array[x][y] !== "H" && array[x][y] !== "M"){
                 return;
             }
-
-            //Dejar celda infectada vacia
-            array[x][y] = "";
-
+        
+            //Si es M 
+            if(array[x][y] === "M"){
+                array[x][y] = "m";  
+            } 
+    
+            //Si es H 
+            if(array[x][y] === "H"){
+                array[x][y] = "";  
+            }
+    
             //Buscar adyacentes 
-            if (x - 1 >= 0 && array[x - 1][y] === infectado){
-                pandemic(array, x - 1, y); // Arriba
+            if (x - 1 >= 0 && (array[x - 1][y] === "M" || array[x - 1][y] === "H")){
+                infectar(array, x - 1, y); // Arriba
             } 
-            if (x + 1 < fila && array[x + 1][y] === infectado){
-                pandemic(array, x + 1, y); // Abajo
+            if (x + 1 < array.length && (array[x + 1][y] === "M" || array[x + 1][y] === "H")){
+                infectar(array, x + 1, y); // Abajo
             } 
-            if (y - 1 >= 0 && array[x][y - 1] === infectado){
-                pandemic(array, x, y - 1); // Izquierda
+            if (y - 1 >= 0 && (array[x][y -1] === "M" || array[x][y -1] === "H")){
+                infectar(array, x, y - 1); // Izquierda
             } 
-            if (y + 1 < columna && array[x][y + 1] === infectado){
-                pandemic(array, x, y + 1); // Derecha
+            if (y + 1 < array[y].length && (array[x][y + 1] === "M" || array[x][y + 1] === "H")){
+                infectar(array, x, y + 1); // Derecha
             } 
         }
     </script>
+    
 </body>
 </html>
