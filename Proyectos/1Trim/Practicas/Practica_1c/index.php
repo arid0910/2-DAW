@@ -11,8 +11,12 @@
       return $resu;
   }
 
-   function LetraNIF($dni) {  
-       return substr("TRWAGMYFPDXBNJZSQVHLCKEO", $dni % 23, 1); 
+  function LetraNIF($dni) {  
+      if (is_numeric($dni)) {
+         return substr("TRWAGMYFPDXBNJZSQVHLCKEO", $dni % 23, 1);
+      } else {
+         return false; 
+      }
    }
    
    function dni_valido($dni){
@@ -20,19 +24,18 @@
       $solo_N = "";
 
       if (strlen($dni) != 9) {
-         $valido = false;
+          $valido = false;
       } else {
-         for ($i=0; $i < strlen($dni)-1; $i++) { 
-            if(!is_numeric($dni[$i])){
-               $valido = false;
-               break;
-            } 
-               
-            $solo_N .= $dni[$i];
+          for ($i = 0; $i < strlen($dni) - 1; $i++) { 
+              if (!is_numeric($dni[$i])) {
+                  $valido = false;
+                  break;
+             } 
+             $solo_N .= $dni[$i];
          }
       }
 
-      if(!LetraNIF($solo_N) == strtoupper($dni[strlen($dni)-1])){
+      if ($valido && LetraNIF($solo_N) != strtoupper($dni[strlen($dni)-1])) {
          $valido = false;
       }
 

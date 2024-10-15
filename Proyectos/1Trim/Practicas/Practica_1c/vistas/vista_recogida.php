@@ -23,7 +23,7 @@ if (isset($_POST["btnEnviar"]) && !$error_foto && $_FILES["foto"]["name"] != "")
 
     //Para mover archivos
     //@ no ver errores
-    @$var = move_uploaded_file($_FILES["foto"]["tmp_name"], "images/".$nom_imagen);
+    @$var = move_uploaded_file($_FILES["foto"]["tmp_name"], "image/".$nom_imagen);
 
     if (!$var) {
         echo "<p>No se a podido mover a la carpeta destino</p>";
@@ -32,7 +32,7 @@ if (isset($_POST["btnEnviar"]) && !$error_foto && $_FILES["foto"]["name"] != "")
         echo "<p><strong>Tipo: </strong>".$_FILES["foto"]["type"]."</p>";
         echo "<p><strong>Tamaño: </strong>".$_FILES["foto"]["size"]."</p>";
         echo "<p><strong>Archivo subido temporalmente en: </strong>".$_FILES["foto"]["tmp_name"]."</p>";
-        echo "<p><img src='images/".$nom_imagen."' alt='Imagen Subida' tittle='Imagen Subida'</p>";
+        echo "<p><img src='image/".$nom_imagen."' alt='Imagen Subida' tittle='Imagen Subida' width='200' height='200' </p>";
     }
 }
 
