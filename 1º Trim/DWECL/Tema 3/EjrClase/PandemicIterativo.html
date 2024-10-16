@@ -14,8 +14,8 @@
                           ['G', 'R', 'R', 'H', 'G', 'G'],
                           ['R', 'R', 'H', 'H', 'G', 'P']];
 
-        //pandemic(biocenosis, 0, 0);
-        //console.log(biocenosis);
+        pandemic(biocenosis, 0, 0);
+        console.log(biocenosis);
 
         pandemic(biocenosis, 4, 2);
         console.log(biocenosis);
@@ -24,14 +24,16 @@
             let infectado = array[x][y]; 
             let fila = array.length;
             let columna = array[0].length;
+            let flag = false;
             
+            if(array[x][y] === "H"){
+                array[x][y] = ""; //Pongo la posicion a vacio
+                flag = true;
+            }
 
-            array[x][y] = ""; //Pongo la posicion a vacio
-
-            let flag = true;
+            
             while (flag) { 
                 flag = false; 
-
                 for (let i = 0; i < fila; i++) {
                     for (let j = 0; j < columna; j++) {
                         if (array[i][j] === "") { //Si la posicion es igual a "" entonces mira las adyacentes
@@ -63,7 +65,6 @@
                 }
             }
         }
-
     </script>
 </body>
 
