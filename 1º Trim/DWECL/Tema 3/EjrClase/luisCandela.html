@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Candela</title>
+</head>
+<body>
+    <script>
+        let mapa = [['*','','','','',''],
+                    ['*','','','','',''],
+                    ['*','','','','',''],
+                    ['*','','','','',''],
+                    ['*','*','*','*','*','*']];
+
+        console.log(heaven(mapa,0,0));
+
+        function heaven(array, x, y){
+            //que no se salga
+            if(x < 0 || x >= array.length || y < 0 || y >= array[x].length){
+                return "No soy libre";
+            }
+
+            //Si la posicion es vacia 
+            if(array[x][y] === ""){
+                return "No soy libre";
+            }
+
+            //Si estamos en la ultima posicion
+            if(x === array.length -1 && y === array[x].length -1){
+                return "Soy libre";
+            }
+
+            // Mark this cell as visited
+            array[x][y] = "visited";
+
+            //Buscar adyacentes 
+            if (x - 1 >= 0 && (array[x - 1][y] === "*")){
+                heaven(array, x - 1, y); // Arriba
+            } 
+            if (x + 1 < array.length && (array[x + 1][y] === "*")){
+                heaven(array, x + 1, y); // Abajo
+            } 
+            if (y - 1 >= 0 && (array[x][y -1] === "*")){
+                heaven(array, x, y - 1); // Izquierda
+            } 
+            if (y + 1 < array[y].length && (array[x][y + 1] === "*")){
+                heaven(array, x, y + 1); // Derecha
+            } 
+
+
+        }
+    </script>
+</body>
+</html>
