@@ -9,48 +9,57 @@
     <p id="txt"></p>
     <script>
         let biocenosis = [['P', 'P', 'G', 'H', 'H', 'R'],
-        ['P', 'P', 'G', 'H', 'H', 'G'],
-        ['P', 'G', 'R', 'H', 'H', 'G'],
-        ['G', 'R', 'R', 'H', 'G', 'G'],
-        ['R', 'R', 'H', 'H', 'G', 'P']];
+                          ['P', 'P', 'G', 'H', 'H', 'G'],
+                          ['P', 'G', 'R', 'H', 'H', 'G'],
+                          ['G', 'R', 'R', 'H', 'G', 'G'],
+                          ['R', 'R', 'H', 'H', 'G', 'P']];
 
-        pandemic(biocenosis, 0, 0);
-        console.log(biocenosis);
+        //pandemic(biocenosis, 0, 0);
+        //console.log(biocenosis);
 
         pandemic(biocenosis, 4, 2);
         console.log(biocenosis);
 
         function pandemic(array, x, y) {
-            let flag = 1;
+            let infectado = array[x][y]; 
+            let fila = array.length;
+            let columna = array[0].length;
+            
 
-            while (flag = 1) {
-                flag = 0;
-                let infectado = array[x][y]; //pos infectado
-                let fila = array.length;
-                let columna = array[0].length;
+            array[x][y] = ""; //Pongo la posicion a vacio
 
-                //Ariba
-                if (x - 1 >= 0 && array[x - 1][y] === infectado) {
-                    array[x-1][y] == "";
-                    flag = 1;
-                }
+            let flag = true;
+            while (flag) { 
+                flag = false; 
 
-                //Abajo
-                if (x + 1 < fila && array[x + 1][y] === infectado) {
-                    array[x + 1][y] == "";
-                    flag = 1;
-                }
+                for (let i = 0; i < fila; i++) {
+                    for (let j = 0; j < columna; j++) {
+                        if (array[i][j] === "") { //Si la posicion es igual a "" entonces mira las adyacentes
+                            //ariba
+                            if (i - 1 >= 0 && array[i - 1][j] === infectado) { // si la adyacente es igual a el infectado se pone a ""
+                                array[i - 1][j] = ""; 
+                                flag = true; 
+                            }
 
-                //Izquierda
-                if (y - 1 >= 0 && array[x][y - 1] === infectado) {
-                    array[x][y - 1] == "";
-                    flag = 1;
-                }
+                            //abajo
+                            if (i + 1 < fila && array[i + 1][j] === infectado) {
+                                array[i + 1][j] = ""; 
+                                flag = true;
+                            }
 
-                //Derecha
-                if (y + 1 < columna && array[x][y + 1] === infectado) {
-                    array[x][y + 1] == "";
-                    flag = 1;
+                            //izquierda
+                            if (j - 1 >= 0 && array[i][j - 1] === infectado) {
+                                array[i][j - 1] = ""; 
+                                flag = true;
+                            }
+
+                            //derecha
+                            if (j + 1 < columna && array[i][j + 1] === infectado) {
+                                array[i][j + 1] = ""; 
+                                flag = true;
+                            }
+                        }
+                    }
                 }
             }
         }

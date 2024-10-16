@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angry Bats Iterativo</title>
+</head>
+<body>
+<script>
+    let AngryBats = [['P', 'P', 'G', 'H', 'H', 'R'],
+                     ['P', 'P', 'G', 'H', 'H', 'G'],
+                     ['P', 'G', 'M', 'H', 'H', 'G'],
+                     ['G', 'R', 'M', 'H', 'G', 'G'],
+                     ['R', 'R', 'H', 'H', 'G', 'P']];
+
+
+    infectar(AngryBats, 2, 2);
+    console.log(AngryBats);
+
+    function infectar(array, x, y) {
+
+        let infectado = array[x][y];
+        let fila = array.length;
+        let columna = array[0].length;
+
+        //Si es M 
+        if (array[x][y] === "M") {
+            array[x][y] = "m";
+        }
+
+        //Si es H 
+        if (array[x][y] === "H") {
+            array[x][y] = "";
+        }
+
+        let flag = true;
+        while (flag) {
+            flag = false;
+            for (let i = 0; i < fila; i++) {
+                for (let j = 0; j < columna; j++) {
+                    if (array[i][j] === "" || array[i][j] === "m") { //Si la posicion es igual a "" o igual a "m" entonces mira las adyacentes
+                        //Buscar adyacentes 
+                        if (i - 1 >= 0 && (array[i - 1][j] === "M" || array[i - 1][j] === "H")) { //Arriba
+                            if(array[i - 1][j] === "H"){
+                                array[i - 1][j] = "";
+                                flag = true;
+                            } 
+                            
+                            if (array[i - 1][j] === "M") {
+                                array[i - 1][j] = "m";
+                                flag = true;
+                            } 
+                            
+                        }
+                        if (i + 1 < array.length && (array[i + 1][j] === "M" || array[i + 1][j] === "H")) { //Abajo
+                            if(array[i + 1][j] === "H"){
+                                array[i + 1][j] = "";
+                                flag = true;
+                            } 
+                            
+                            if (array[i + 1][j] === "M") {
+                                array[i + 1][j] = "m";
+                                flag = true;
+                            } 
+                        }
+                        if (j - 1 >= 0 && (array[i][j - 1] === "M" || array[i][j - 1] === "H")) { //Izquierda
+                            if(array[i][j - 1] === "H"){
+                                array[i][j - 1] = "";
+                                flag = true;
+                            } 
+                            
+                            if (array[i][j - 1] === "M") {
+                                array[i][j - 1] = "m";
+                                flag = true;
+                            } 
+                        }
+                        if (j + 1 < array[j].length && (array[i][j + 1] === "M" || array[i][j + 1] === "H")) { //Derecha
+                            if(array[i][j + 1] === "H"){
+                                array[i][j + 1] = "";
+                                flag = true;
+                            } 
+                            
+                            if (array[i][j + 1] === "M") {
+                                array[i][j + 1] = "m";
+                                flag = true;
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
