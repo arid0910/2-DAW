@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,20 @@
 
 <body>
     <header>
-        <p>Los descuentos hasta el 40% terminan en: </p> <p>01:14:21:05</p>
-        
+        <p>
+            <span>descuentos hasta el 40% terminan en:</span>
+            <span>01:14:21:05</span>
+        </p>
+
+        <nav>
+            <ul>
+                <li><a href="ayuda.html">ayuda</a></li>
+                <li><a href="pedido.html">pedidos y devocluciones</a></li>
+                <li><a href="targeta.html">targeta regalo</a></li>
+                <li><a href="club.html">únete al club</a></li>
+            </ul>
+        </nav>
+
         <div>
             <svg viewBox="100 100 50 32" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -20,18 +32,18 @@
 
             <nav>
                 <ul>
-                    <li><strong>ZAPATILLAS</strong></li>
-                    <li><strong>HOMBRE</strong></li>
-                    <li><strong>MUJER</strong></li>
-                    <li><strong>NIÑO</strong></li>
-                    <li>NOVEDADES</li>
-                    <li>DEPORTES</li>
-                    <li><strong>PROMOCIÓN</strong></li>
+                    <li><a href="#"><strong>ZAPATILLAS</strong></a></li>
+                    <li><a href="#"><strong>HOMBRE</strong></a></li>
+                    <li><a href="#"><strong>MUJER</strong></a></li>
+                    <li><a href="#"><strong>NIÑO</strong></a></li>
+                    <li><a href="#">NOVEDADES</a></li>
+                    <li><a href="#">DEPORTES</a></li>
+                    <li><a href="#"><strong>PROMOCIÓN</strong></a></li>
                 </ul>
             </nav>
 
-            <div>
-                <input type="text" placeholder="Buscar ">
+            <div role="search">
+                <input type="text" placeholder="Buscar" aria-label="Texto a buscar en la web">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                     fill="#5f6368">
                     <path
