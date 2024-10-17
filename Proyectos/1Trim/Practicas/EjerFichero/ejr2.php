@@ -1,5 +1,5 @@
 <?php
-    if(isset($_POST["btnCrear"])){
+    if(isset($_POST["btnMostrar"])){
         $error_form = !is_numeric($_POST["numero"]) || $_POST["numero"] == "" || $_POST["numero"] < 1 || $_POST["numero"] > 10; 
     }
 ?>  
@@ -8,17 +8,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
     <style>
         .error{color:red}
     </style>
 </head>
 <body>
-    <form action="ejr1.php" method="post" enctype="multipart/form-data">
+    <form action="ejr2.php" method="post" enctype="multipart/form-data">
         <label for="numero">Introduce un número del 1 al 10</label>
         <input type="text" name="numero" id="numero"/> </br>
         <?php
-        if(isset($_POST["btnCrear"]) && $error_form){
+        if(isset($_POST["btnMostrar"]) && $error_form){
             if($_POST["numero"] == ""){
                 echo "<span class='error'>*Campo Vacio*</br></span>";
             } else {
@@ -26,15 +26,20 @@
             }
          }  
         ?>
-        <button type="submit" name="btnCrear">Crear tabla</button>
+        <button type="submit" name="btnMostrar">Mostrar tabla</button>
     </form>
+
     <?php
         if(isset($_POST["numero"])){
-            $file = "tabla_".$_POST["numero"].".txt";
-            if(file_exists($file)){
-                
+            $nombre = "tabla_".$_POST["numero"].".txt";
+            $ruta = "tabla/".$nombre;
+
+            if(file_exists($ruta)){
+                echo "<h2>Lectura completa de: ".$nombre."</h2>";
+                $todo = file_get_contents($ruta);     
+                echo nl2br($todo);
             } else {
-                echo "<p class='error'>*Esta tabla ya existe*</br></p>";
+                echo "<p class='error'>*Esta tabla no existe*</br></p>";
             }
         }
     ?>
