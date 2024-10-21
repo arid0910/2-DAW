@@ -15,7 +15,7 @@
         function es_txt() {
             return tiene_extension($_FILES["fichero"]["name"]) === "txt";
         }
-       
+        
 
         $error_fichero = 
         $_FILES["fichero"]["name"] == "" ||
@@ -64,8 +64,6 @@
         if(isset($_POST["btnEnviar"]) && !$error_fichero){
             $nom_fichero= "archivo.txt";
 
-            //Para mover archivos
-            //@ no ver errores
             @$var = move_uploaded_file($_FILES["fichero"]["tmp_name"], "fichero/".$nom_fichero);
 
             if($var){

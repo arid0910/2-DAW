@@ -22,7 +22,7 @@
 
         <button type="submit" name="btnEnviar">Contar palabras</button>
     </form>
-
+ 
     <?php
         if (isset($_POST["btnEnviar"])) {
             $texto = $_POST["texto"];  

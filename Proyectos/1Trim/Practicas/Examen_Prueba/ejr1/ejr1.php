@@ -1,6 +1,3 @@
-<?php
-   
-?>  
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +8,7 @@
 <body>
     <form action="ejr1.php" method="post">
         <label for="txt">Introduce un texto</label>
-        <input type="text" name="txt" id="txt" placeholder="Introduce texto"></br>
+        <input type="text" name="txt" id="txt" placeholder="Introduce texto" value="<?php if(isset($_POST["txt"])) echo $_POST["txt"]?>"></br>
         <button type="submit" name="btnEnviar">Enviar</button>
     </form>
 
@@ -21,11 +18,11 @@
                 while(isset($txt[$cont])){
                     $cont++;
                 }
-            return 0;
+            return $cont; 
         }
 
         if(isset($_POST["btnEnviar"])){
-            echo strlentxt($_POST["txt"]);
+            echo "<p>Número letras: ".strlentxt($_POST["txt"])."<p>";
         }
     ?>
 </body>
