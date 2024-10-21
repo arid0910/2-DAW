@@ -28,12 +28,17 @@ if (isset($_POST["btnEnviar"])) {
     }
 
     @$fd = fopen("Horario/horarios.txt", "r");
-    if ($fs) {
+    if ($fd) {
         echo "<h2>Horario de los profesores</h2>";
     ?>
         <label for="horario">Horario de los profesores: </label>
         <select name="horario" id="horario">
-            
+            <?php
+                while($linea = fgets($fd)){
+                    $opcion = explode("\t", $linea);
+                    echo "<option value='".$opcion[0]."'>".$opcion[0]."</option>";
+                }
+            ?>
         </select>
     <?php
         fclose($fd);
