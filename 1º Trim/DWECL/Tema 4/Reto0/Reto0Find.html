@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reto 0 find</title>
 </head>
-
 <body>
     <script>
-        /*Tenemos un array muy grande con elementos de la siguiente estructura:
-        [{28924:"Estepona"},....,{29601:"Marbella"}]
-        Lo que queremos es crear un texto y un botón
-        que ponga buscar que lo que haga sea mostrar el CP y
-        el nombre de la ciudad que coincida o contenga el texto del campo creado.
-        No importan las mayúsculas y minúsculas en*/
+        var ciudades = [{ Nombre: "ESTEPONA", CodPostal: 29680 },{ Nombre: "MALAGA", CodPostal: 12345 },{ Nombre: "MANILVA", CodPostal: 54321 },{ Nombre: "FUENGIROLA", CodPostal: 11111 }
+        ];
 
-        var ciudades = [{ Nombre: "ESTEPONA", CodPostal: 29680 }, { Nombre: "MALAGA", CodPostal: 12345 }, { Nombre: "MANILVA", CodPostal: 54321 }, { Nombre: "FUENGIROLA", CodPostal: 11111 }];
         const buscarPoblacion = () => {
-           let ciudadInput = document.getElementById("ciudad").value;
-           let cosPostal = ciudades.find(cp => cp.Nombre == ciudadInput.toUpperCase())
-           
+            let ciudadInput = document.getElementById("ciudad").value;
+            let ciudadEncontrada = ciudades.find(cp => cp.Nombre.includes(ciudadInput.toUpperCase()));
+
+            if (ciudadEncontrada) {
+                document.getElementById("resultado").innerHTML = ciudadEncontrada.CodPostal + " - " + ciudadEncontrada.Nombre;
+            } else {
+                document.getElementById("resultado").innerHTML = "Ciudad no encontrada";
+            }
         }
     </script>
 
     <p>
-        <label for="ciudad">Introduzca una ciudad</label>
-        <input type="text" name="ciudad" id="ciudad" />
-        <button type="button" onclick="buscarPoblacion()">Calcular</button>
+        <input type="text" name="ciudad" id="ciudad" placeholder="Nombre ciudad"/>
+        <button type="button" onclick="buscarPoblacion()">Buscar</button>
     </p>
 
-    <p id="name"></p>
+    <p id="resultado"></p>
 </body>
 </html>
