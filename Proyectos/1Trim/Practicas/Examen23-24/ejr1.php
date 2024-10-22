@@ -28,7 +28,7 @@
             echo $linea1;
             
             $letraIni = "A";
-            for ($i=0; $i < 27; $i++) { 
+            for ($j=0; $j < 27; $j++) { 
                 
             }
 
