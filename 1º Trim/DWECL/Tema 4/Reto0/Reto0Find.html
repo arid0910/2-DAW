@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto 0 find</title>
+    <title>Document</title>
 </head>
+
 <body>
+
     <script>
-        var ciudades = [{ Nombre: "ESTEPONA", CodPostal: 29680 },{ Nombre: "MALAGA", CodPostal: 12345 },{ Nombre: "MANILVA", CodPostal: 54321 },{ Nombre: "FUENGIROLA", CodPostal: 11111 }
-        ];
-
+        var ciudades = [{ Nombre: "Estepona", CodPostal: 29680 }, 
+                        { Nombre: "Malaga", CodPostal: 12345 }, 
+                        { Nombre: "Manilva", CodPostal: 54321 }, 
+                        { Nombre: "Fuengirola", CodPostal: 11111 }];
+                        
         const buscarPoblacion = () => {
-            let ciudadInput = document.getElementById("ciudad").value;
-            let ciudadEncontrada = ciudades.find(cp => cp.Nombre.includes(ciudadInput.toUpperCase()));
-
-            if (ciudadEncontrada) {
-                document.getElementById("resultado").innerHTML = ciudadEncontrada.CodPostal + " - " + ciudadEncontrada.Nombre;
-            } else {
-                document.getElementById("resultado").innerHTML = "Ciudad no encontrada";
-            }
+            let codPostal = document.getElementById('codP').value
+            let ciudad = ciudades.find(c => c.CodPostal == codPostal);
+            let obj = document.getElementById('name')
+            ciudad != undefined ? obj.innerHTML = ciudad.Nombre : obj.innerHTML = "NO EXISTE"
         }
     </script>
 
     <p>
-        <input type="text" name="ciudad" id="ciudad" placeholder="Nombre ciudad"/>
-        <button type="button" onclick="buscarPoblacion()">Buscar</button>
+        <label for="codP">Introduzca un Codigo Postal</label>
+        <input type="text" name="codP" id="codP" />
+        <button type="button" onclick="buscarPoblacion()">Calcular</button>
     </p>
 
-    <p id="resultado"></p>
+    <p id="name"></p>
 </body>
+
 </html>
