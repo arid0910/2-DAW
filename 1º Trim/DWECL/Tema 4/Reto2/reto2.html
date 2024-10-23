@@ -45,20 +45,22 @@
         console.log(sinUsarCars);
 
         //-Cuantas marcas han sido utilizadas
-        let marcasUsadas = buddies.map(m => m.car);
-        let marcasUsadasNoDupe = marcasUsadas.filter((marca, indice, arr) => {
-            return arr.indexOf(marca) === indice;
-        });
+        let buddiesCocheUsados = buddies.map(buddy => buddy.car);
+        let cochesUsados = cars.flat(2).filter(car => buddiesCocheUsados.includes(car));
 
-        console.log(marcasUsadasNoDupe.length)
+        console.log(cochesUsados.length)
 
         //-Cuantas marcas no han sido utilizadas
-        var buddiesCoche = buddies.map(buddy => buddy.car);
-        var sinUsarCars = cars.flat(2).filter(car => !buddiesCoche.includes(car));
+        let buddiesCocheNoUsados = buddies.map(buddy => buddy.car);
+        let cochesNoUsados = cars.flat(2).filter(car => !buddiesCocheNoUsados.includes(car));
 
-        console.log(sinUsarCars.length);
+        console.log(cochesNoUsados.length);
 
     </script>
 </body>
 
 </html>
+
+
+
+
