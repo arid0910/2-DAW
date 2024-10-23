@@ -25,19 +25,38 @@
         }).filter(valor => valor != undefined));
 
         //Alguien sabría decirme los coches de carrakos que no estén en cars?
+        const cochesNoEnCars = carrakos.flat(2).filter(coche => !cars.flat(2).includes(coche));
+        console.log(cochesNoEnCars)
+
+
+        var carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"], ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+        var buddies = [{ firstName: "Chuck", lastName: "Norris", car: "Honda" }, { firstName: "Yakie", lastName: "Chang", car: "BMW" }, { firstName: "Bruce", lastName: "Lee", car: "Honda" }, { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
 
         //-Marcas utilizadas por los buddies
         console.log(buddies.map(m => m.car));
 
         //Sort buddies by the car property, map the cars, and filter duplicates
-        console.log(buddies.map(m => m.car).sort().filter((m, index, arr) =>  m != arr[index - 1]))
-        
+        console.log(buddies.map(m => m.car).sort().filter((m, index, arr) => m != arr[index - 1]))
+
         //-Marcas no utilizadas por los buddies.
-        
+        var buddiesCoche = buddies.map(buddy => buddy.car);
+        var sinUsarCars = cars.flat(2).filter(car => !buddiesCoche.includes(car));
+
+        console.log(sinUsarCars);
 
         //-Cuantas marcas han sido utilizadas
+        let marcasUsadas = buddies.map(m => m.car);
+        let marcasUsadasNoDupe = marcasUsadas.filter((marca, indice, arr) => {
+            return arr.indexOf(marca) === indice;
+        });
+
+        console.log(marcasUsadasNoDupe.length)
 
         //-Cuantas marcas no han sido utilizadas
+        var buddiesCoche = buddies.map(buddy => buddy.car);
+        var sinUsarCars = cars.flat(2).filter(car => !buddiesCoche.includes(car));
+
+        console.log(sinUsarCars.length)
 
     </script>
 </body>
