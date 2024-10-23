@@ -51,8 +51,8 @@
         };
 
         //Suma de notas de dwec
-        const notasAlumnos = valumnos.alumnos.filter(valor => valor.notas > 0);
-        const sumaNota = notasAlumnos.reduce((accumulador, valorActual) => accumulador + valorActual.notas, 0);
+        const notasAlumnos = valumnos.alumnos.map(valor => Object.values(valor.notas));
+        const sumaNota = notasAlumnos.reduce((accumulador, valorActual) => accumulador + valorActual, 0);
         const media = sumaNota / notasAlumnos.length
 
         console.log("La suma de la nota es: " + sumaNota + " La media de la nota es: " + media);
