@@ -1,93 +1,70 @@
 <?php
-    if(isset($_POST["btnMostrar"])){
-        $numero = $_POST["numero"];
-        $linea_buscar = $_POST["linea"];
-        $linea_valida = "";
-        $nombre = "tabla_" . $numero . ".txt";
-        $ruta = "tabla/" . $nombre;
-        $num_lineas = 0;
-        
-        if (file_exists($ruta)) {
-            $file = fopen($ruta, "r");
-            while(fgets($file)){
-                $num_lineas++;
-            }
-            fclose($file);
-        } 
-    
-        $error_fichero = !is_numeric($linea_buscar) || $linea_buscar == "" || $linea_buscar < 1 || $linea_buscar > $num_lineas;
-        $error_tabla = !is_numeric($numero) || $numero == "" || $numero < 1 || $numero > 10; 
+function tiene_extension($texto)
+{
+    $array = explode(".", $texto);
+    if (strtolower(end($array)) == "txt") {
+        $respuesta = "txt";
+    } else {
+        $respuesta = false;
     }
-   
-?>  
+    return $respuesta;
+}
+
+if (isset($_POST["enviar"])) {
+    $error_fichero = $_FILES["fichero"]["error"] || $_FILES["fichero"]["size"] > 2500000 || !tiene_extension($_FILES["fichero"]["name"]);
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 4</title>
-    <style>
-        .error{color:red}
-    </style>
 </head>
+
 <body>
-    <form action="ejr3.php" method="post" enctype="multipart/form-data">
-        <label for="numero">Introduce un número del 1 al 10</label>
-        <input type="text" name="numero" id="numero"/> </br>
+    <h1>Ejercicio 4</h1>
+    <form action="Ejercicio_4.php" method="post" enctype="multipart/form-data">
+        <label for="fichero">Por favor, suba un archivo .txt y un tamaño inferior a 2.5MB: </label>
+        <input type="file" name="fichero" id="fichero" accept=".txt">
         <?php
-        if(isset($_POST["btnMostrar"]) && $error_tabla){
-            if($_POST["numero"] == ""){
-                echo "<span class='error'>*Campo Vacio*</br></span>";
+        if (isset($_POST["enviar"]) && $error_fichero) {
+            if ($_FILES["fichero"]["name"] == "") {
+                echo "<span> * Debes subir un archivo * </span>";
+            } elseif ($_FILES["fichero"]["error"]) {
+                echo "<span> * No se ha podido subir el archivo al servidor * </span>";
+            } elseif (!tiene_extension($_FILES["fichero"]["name"])) {
+                echo "<span> * El archivo no tiene la extensión correcta (.txt) * </span>";
             } else {
-                echo "<span class='error'>*Solo se permite números entre 1 y 10*</br></span>";
-            }
-         }  
-        ?>
-
-        <label for="linea">Introduce la linea a leer</label>
-        <input type="text" name="linea" id="linea"/> </br>
-        <?php
-        if(isset($_POST["btnMostrar"]) && $error_fichero){
-            if($_POST["linea"] == ""){
-                echo "<span class='error'>*Campo Vacio*</br></span>";
-            } else {
-                echo "<span class='error'>*No existe la linea ".$_POST["linea"]."*</br></span>";
-            }
-         }  
-        ?>
-        <button type="submit" name="btnMostrar">Mostrar línea</button>
-    </form>
-
-    <?php
-        if(isset($_POST["numero"])){
-            $nombre = "tabla_".$_POST["numero"].".txt";
-            $ruta = "tabla/".$nombre;
-
-            if(file_exists($ruta)){
-               $file = fopen($ruta, "r");
-
-               if (!$file) {
-                    die("<p class='error'>*No se puede abrir el fichero*</p>");
-               }
-
-                $linea_actual = 0;
-                while($linea = fgets($file)){
-                    $linea_actual++;
-                    if ($linea_actual == $linea_buscar) {
-                        $linea_valida = $linea;
-                        break; 
-                    }   
-                } 
-
-                fclose($file);
-
-                echo "<p>".$linea_valida."</p>";
-            } else {
-                echo "<p class='error'>*Esta tabla no existe*</br></p>";
+                echo "<span> * El archivo ha superado el tamaño máximo(2.5MB) * </span>";
             }
         }
-        
+        ?>
+        </br></br></br>
+        <button type="submit" name="enviar">Subir</button>
+    </form>
+    <?php
+    if (isset($_POST["enviar"]) && !$error_fichero) {
+        $ruta = $_FILES["fichero"]["tmp_name"];
+        @$file = fopen($ruta, "r");
+        if (!$file) {
+            die("<p> No se ha podido abrir el fichero</p>");
+        }
+        $palabras = 0;
+        while (!feof($file)) {
+            $linea = fgets($file);
+            if (trim($linea) == "") {
+                continue;
+            }
+            $linea_limpia = str_replace([",", ".", ";"], " ", trim($linea));
+            $arr_palabras = explode(" ", trim($linea_limpia));
+            $palabras += count($arr_palabras);
+        }
+        fclose($file);
+        echo "<p> El documento es: " . $_FILES["fichero"]["name"] . " tiene " . $palabras . " palabras. </p>";
+    }
     ?>
-     
 </body>
+
 </html>
