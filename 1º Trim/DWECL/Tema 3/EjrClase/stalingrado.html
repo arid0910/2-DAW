@@ -23,12 +23,12 @@
                 return "Rusos ganan";
             }
 
-            // Si la celda está vacía o bloqueada por "R", los Rusos ganan
+            // Si la celda está bloqueada por "R" los Rusos ganan
             if (array[x][y] === "R") {
                 return "Rusos ganan";
             }
 
-            // Si llega a la meta en la esquina inferior derecha, los Alemanes ganan
+            // Si llega a la meta en la esquina inferior derecha los Alemanes ganan
             if (x === array.length - 1 && y === array[0].length - 1 && array[x][y] === "G") {
                 return "Alemanes ganan";
             }
@@ -58,7 +58,7 @@
             }
 
             console.log(array);
-            // Si no se encuentra un camino hacia la victoria, los Rusos ganan
+            // Si no se encuentra un camino los Rusos ganan
             return "Rusos ganan";
         }
     </script>
