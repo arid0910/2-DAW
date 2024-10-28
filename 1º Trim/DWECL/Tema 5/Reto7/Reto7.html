@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 7</title>
+</head>
+<body>
+
+    <button type="submit" onclick="liFruta()" name="btnGenerar">Generar lista fruta</button>
+    <ul id="frutas">
+
+    </ul>
+    <script>
+        let frutas = ["aguacate", "pera", "manzana", "naranja", "tomate", "granada", "mango", "litchi", "nispero"];
+        
+        let tropicStock = [{fruta:"aguacate",stock:50}, {fruta:"mango",stock:10}, {fruta:"litchi",stock:20},{fruta:"nispero",stock:25}];
+        // muestra las frutas tropicales con stock menor a 40 como elementos li y su nodo padre será el ul frutas
+        let liFruta = () => {
+            tropicStock.filter(fs => fs.stock < 40).map(f =>{
+                let lista = document.createElement("li");
+                let contenido = document.createTextNode(f.fruta)
+                lista.appendChild(contenido)
+                document.getElementById("frutas").appendChild(lista)
+            })
+        }
+       
+    </script>
+</body>
+</html>
