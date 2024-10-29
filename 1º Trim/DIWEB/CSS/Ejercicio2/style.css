@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+}
+
+ul.menu{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+ul.menu>li{
+    background-color: #27a2db;
+    border: solid 1px #d2d2d2;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: none;
+}
+
+@media(min-width: 800px) {
+    .menu {
+        flex-flow: column wrap;
+        padding: 0;
+    }
+  }
+  
+  @media(min-width: 600px) {
+    .menu {
+        justify-content: space-around;
+    }
+  }
