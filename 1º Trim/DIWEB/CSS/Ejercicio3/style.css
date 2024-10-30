@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: sans-serif;
+}
+
+header, article, main, footer, aside, nav{
+    text-align: center;
+    color: white;
+}
+
+header, article, footer, aside, nav{
+    padding: 1em;
+    margin: .2em;
+}
+
+header{
+    background-color: turquoise;
+}
+
+nav{
+    background-color: orange;
+    order: -1;
+}
+
+article{
+    background-color: purple;
+    height: 25vh;
+}
+
+aside{
+    background-color: lightgrey;
+}
+
+footer{
+    background-color: lightblue;
+}
+
+div#contenido, main{
+    display: flex;
+    flex-direction: column;
+}
+
+/*Version tablet*/
+@media (min-width: 768px){
+    main{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+
+
