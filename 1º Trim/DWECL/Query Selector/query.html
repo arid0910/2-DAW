@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3 class="ejemplo">introduzca una expresi&oacute;n
+        num&eacute;rica</h3>
+    <label for="texto">Introducir datos:</label>
+    <input type="text" id="texto">
+    <button>Ejecutar expresi&oacute;n</button>
+    <p class="ejemplo">Un p&aacute;rrafo de la clase ejemplo.</p>
+    <p>otro p&aacute;rrafo.</p>
+    <button onclick="laFuncion()">Cambiar color</button>
+    <script>
+        function laFuncion() {
+            document.querySelector(".ejemplo").style.backgroundColor = "red";
+            document.querySelector("p").innerHTML = "rojo";
+        }
+        var input = document.querySelector('input');
+        var boton = document.querySelector('button');
+        var parrafo = document.querySelector('p');
+        boton.onclick = function () {
+            var dato = input.value;
+            parrafo.innerHTML = eval(dato);
+        }
+    </script>
+</body>
+
+</html>

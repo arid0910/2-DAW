@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto 8</title>
+    <title>Reto 9</title>
 </head>
 
 <body>
 
     <ul id="carrakos"> </ul>
     <script>
-        var carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"], ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+        let carrakos = ["Chevrolet", "Tesla", "BMW",["Honda", "Infiniti",["Lexus", "Mercedes", "Kia"], "Hyunday"],["Mazda", "Mercedes", "Jeep",["KTM", "Nissan", "Isuzu"]]];
+        let xungos = [{nombre:"Bruce Lee",carros:["Chevrolet", "Tesla", "BMW"]},{nombre:"YakiChan",carros:["Lexus", "Mercedes", "Kia"]}]
 
         function lista(arr, ulPadre) {
             arr.map(c => {
@@ -21,7 +22,11 @@
                     lista(c, ul);
                 } else {
                     let lista = document.createElement("li");
-                    let contenido = document.createTextNode(c);
+                    if(c.filter(ca => xungos.includes(ca))){
+                        let contenido = document.createTextNode(c + "de" + xungos.filter(x => c === x.carros).map(n => n.nombre));
+                    } else {
+                        let contenido = document.createTextNode(c);
+                    }
                     lista.appendChild(contenido);
                     ulPadre.appendChild(lista);
                 }
