@@ -14,7 +14,7 @@ header, article, main, footer, aside, nav{
 
 header, article, footer, aside, nav{
     padding: 1em;
-    margin: .2em;
+    margin: .2em; 
 }
 
 header{
@@ -24,15 +24,18 @@ header{
 nav{
     background-color: orange;
     order: -1;
+    flex-grow: 1;
 }
 
 article{
     background-color: purple;
     height: 25vh;
+    flex-grow: 2;
 }
 
 aside{
     background-color: lightgrey;
+    flex-grow: 1;
 }
 
 footer{
