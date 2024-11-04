@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto6</title>
+</head>
+<body>
+    <button type="button" onclick="liFrutas()" id="btnGen">Generar lista frutas</button>
+    
+    <ul id="frutas"></ul>
+
+    <script>
+        let frutas = ["aguacate", "pera", "manzana", "naranja", "tomate", "granada", "mango", "litchi", "nispero"];
+
+        function liFrutas() {
+            frutas.map(f =>{
+                let lista = document.createElement("li");
+                let contenido = document.createTextNode(f);
+                lista.appendChild(contenido);
+                document.getElementById("frutas").appendChild(lista);
+            })
+        }
+    </script>
+</body>
+</html>
