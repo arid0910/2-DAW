@@ -11,8 +11,11 @@
 
     <ul id="carrakos"> </ul>
     <script>
-        let carrakos = ["Chevrolet", "Tesla", "BMW",["Honda", "Infiniti",["Lexus", "Mercedes", "Kia"], "Hyunday"],["Mazda", "Mercedes", "Jeep",["KTM", "Nissan", "Isuzu"]]];
-        let xungos = [{nombre:"Bruce Lee",carros:["Chevrolet", "Tesla", "BMW"]},{nombre:"YakiChan",carros:["Lexus", "Mercedes", "Kia"]}]
+        let carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyundai"], ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+        let xungos = [
+            { nombre: "Bruce Lee", carros: ["Chevrolet", "Tesla", "BMW"] },
+            { nombre: "YakiChan", carros: ["Lexus", "Mercedes", "Kia"] }
+        ];
 
         function lista(arr, ulPadre) {
             arr.map(c => {
@@ -21,14 +24,13 @@
                     ulPadre.appendChild(ul);
                     lista(c, ul);
                 } else {
-                    let lista = document.createElement("li");
-                    if(c.filter(ca => xungos.includes(ca))){
-                        let contenido = document.createTextNode(c + "de" + xungos.filter(x => c === x.carros).map(n => n.nombre));
-                    } else {
-                        let contenido = document.createTextNode(c);
-                    }
-                    lista.appendChild(contenido);
-                    ulPadre.appendChild(lista);
+                    let li = document.createElement("li");
+
+                    let propietario = xungos.filter(x => x.carros.includes(c)).map(x => x.nombre);
+                    let contenido = document.createTextNode(propietario > 0 ? c + " de " + propietario : c);
+
+                    li.appendChild(document.createTextNode(contenido));
+                    ulPadre.appendChild(li);
                 }
             });
         }
