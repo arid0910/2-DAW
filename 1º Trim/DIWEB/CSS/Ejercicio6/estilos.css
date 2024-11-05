@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+}
+
+#ofertas{
+    display: flex;
+    flex-flow: column;
+    row-gap: 2em;
+}
+
+.item-oferta{
+    display: flex;
+    flex-flow: column;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.item-oferta h3,
+.item-oferta p,
+.item-oferta button{
+    text-align: center;
+}
+
+.item-oferta img{
+    width: 50%;
+    height: auto;
+    order: 1;
+}
+
+.item-oferta p{
+    order: 2;
+}
+
+.item-oferta ul{
+    order: 3;
+}
+
+.item-oferta button.boton-cesta{
+    margin: auto;
+    order: 4;
+}
