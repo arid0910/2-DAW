@@ -145,26 +145,25 @@ section#principal, article.news-art{
 }
 
 @media (min-width:1024px){
-  div#content > nav#main-menu > ul{
-    display:flex;
-    flex-direction: row;
+  div#content>nav#main-menu>ul {
+    display: flex;
+    flex-flow: row ;
     justify-content: space-evenly;
   }
-  
-  div#content > nav#main-menu > label > span{
+
+  div#content>nav#main-menu>label>span {
     display: none;
   }
-
-  section#principal{
-    flex-flow: row;
+  section#principal {
+    flex-flow: row wrap;
   }
 
-  section#principal > h2{
-    flex: 100%;
+  section#principal h2, section#principal article#primerElemento {
+    flex: 0 0 100%;
   }
 
-  section#principal > #primerElemento{
-    flex: 100%;
+  section#principal article.news-art {
+    flex: 0 0 50%;
   }
 }
 
