@@ -3,7 +3,12 @@
 }
 
 body{
-    padding: 0;
+    margin: 0;
+}
+
+div#contenido{
+    display: flex;
+    flex-direction: column;
 }
 
 #ofertas{
@@ -18,40 +23,29 @@ body{
     border: 1px solid black;
     border-radius: 20px;
     padding: 2rem;
-}
-
-.item-oferta h3,
-.item-oferta p,
-.item-oferta button{
-    text-align: center;
+    margin: 1rem;
+    align-items: center;
+    max-width: 25rem;
 }
 
 .item-oferta img{
-    width: 100%;
-    height: auto;
-    order: 1;
+    max-width: 100%;
 }
 
-.item-oferta p{
-    order: 2;
+.item-oferta h3,
+.item-oferta img{
+    order: -1;
 }
 
-.item-oferta ul{
-    order: 3;
-}
-
-.item-oferta button.boton-cesta{
+.item-oferta button.boton-cesta {
     padding: .5rem;
     font-weight: bold;
-    flex: 0 40%;
     background-color: orange;
-    color: white;
-    margin-top: auto;
-    margin-bottom: 2rem;
     border: none;
+    color: white;
+    margin-top:auto; 
     border-radius: 5px;
     align-self: center;
-    order: 4;
 }
 
 
@@ -61,6 +55,6 @@ body{
     }
 
     button.boton-cesta {
-        flex: 0;
+        flex-grow: 0;
     }
 }
