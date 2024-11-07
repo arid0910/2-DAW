@@ -87,6 +87,7 @@ div#content, section#principal, article.news-art{
 div#content > header{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 div#content main section#principal article#primerElemento{
@@ -108,7 +109,8 @@ div#content > nav#main-menu > input, div#content > nav#main-menu > ul{
 }
 
 div#content > nav#main-menu > input:checked + ul{
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin-top: 0;
 }
 
@@ -145,7 +147,7 @@ section#principal, article.news-art{
 }
 
 @media (min-width:1024px){
-  div#content>nav#main-menu>ul {
+  div#content > nav#main-menu > ul {
     display: flex;
     flex-flow: row ;
     justify-content: space-evenly;
@@ -159,11 +161,11 @@ section#principal, article.news-art{
   }
 
   section#principal h2, section#principal article#primerElemento {
-    flex: 0 0 100%;
+    flex: 100%;
   }
 
   section#principal article.news-art {
-    flex: 0 0 50%;
+    flex: 50%;
   }
 }
 
