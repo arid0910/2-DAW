@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1</title>
+</head>
+<body>
+    <script>
+        // ¿Serías capaz en un array de nombres de localizar la persona más popular?
+        const nombres =  ["Ana", "Juan", "Juan", "Ana", "Ana", "Juan", "Juan", "David"] 
+
+        let cantidad = 0
+        let nombreMasPopular = ""
+
+        nombres.map(n => {
+            if(cantidad < nombres.filter(p => n === p).length){
+                cantidad =  nombres.filter(p => n === p).length
+                nombreMasPopular = n
+            }
+        })
+
+        console.log(nombreMasPopular)
+    </script>
+</body>
+</html>
