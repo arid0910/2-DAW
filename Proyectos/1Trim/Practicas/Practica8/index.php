@@ -29,6 +29,28 @@
         mysqli_close($conexion);
         die(error_page("Primer CRUD","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
     }
+
+    //Obtengo los detalles del usuario tanto al pulsar detalles cómo en el borrar cómo en Editar
+    if(isset($_POST["btnDetalles"]) || isset($_POST["btnBorrar"]) || isset($_POST["btnEditar"]))
+    {
+        if(isset($_POST["btnDetalles"]))
+            $id_usuario=$_POST["btnDetalles"];
+        elseif(isset($_POST["btnBorrar"]))
+            $id_usuario=$_POST["btnBorrar"];
+        else
+            $id_usuario=$_POST["btnEditar"];
+
+        try
+        {
+            $consulta="select * from usuarios where id_usuario='".$id_usuario."'";
+            $detalle_usuario=mysqli_query($conexion,$consulta);
+        }
+        catch(Exception $e)
+        {
+            mysqli_close($conexion);
+            die(error_page("Primer CRUD","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +88,10 @@
     <h3>Lista de usuarios</h3>
     
     <?php
+        if(isset($_POST["btnDetalles"])){
+            require "vista/vista_detalles.php";
+        }
+
         require "vista/vista_tablaPrincipal.php";
 
         if(isset($_POST["btnBorrar"])){

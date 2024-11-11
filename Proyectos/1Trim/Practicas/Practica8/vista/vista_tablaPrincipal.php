@@ -5,7 +5,7 @@
             <th>Nombre</th>
             <th>
                 <form action='index.php' method='post'>
-                    <button class='enlace' type='submit' name='btnAgregar'>Usuario+</button>
+                    <span>Usuario<button class='enlace' type='submit' name='btnAgregar'>+</button></span>
                 </form>
             </th>
         </tr>
@@ -14,7 +14,11 @@
             echo "<tr>";
                 echo "<td>".$tupla["id_usuario"]."</td>";
                 echo "<td><img src='Img/".$tupla["foto"]."' alt='Foto default'></td>";
-                echo "<td>".$tupla["nombre"]."</td>";
+                echo "<td>";
+                    echo "<form action='index.php' method='post'>
+                            <button class='enlace' type='submit' name='btnDetalles' value='".$tupla["id_usuario"]."'>".$tupla["nombre"]."</button>
+                        </form>";
+              echo "</td>";
                 echo "<td>";
                     echo "<form action='index.php' method='post'>
                             <button class='enlace' type='submit' name='btnBorrar' value='".$tupla["id_usuario"]."'>Borrar</button>
