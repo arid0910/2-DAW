@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challange 7</title>
+    <title>Challange 8</title>
 </head>
 <body>
     <script>
@@ -20,7 +20,20 @@
             return max;
         }
 
+        const mostrarUltima = (array, generacion, cual) => {
+            let reyes = []
+            array.map(r => {
+                if (Array.isArray(r)) {
+                    reyes.push(...mostrarUltima(r, generacion + 1, cual)); 
+                } else{
+                    if(generacion == cual) reyes.push(r)
+                }
+            });
+            return reyes
+        }
+    
         console.log("ultima generacion: " + ultimaGen(REYES, 1));
+        console.log(mostrarUltima(REYES, 1 ,  ultimaGen(REYES, 1)))
     </script>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$ ejercicios sencillos</title>
+</head>
+
+<body>
+    <script>
+        // Ejercicio 1: Utiliza map y filter para calcular los salarios aumentados de empleados con salario bajo.Tienes un array de objetos empleados con propiedades name y salary.
+        // Se necesita seleccionar empleados con salario menor a 3000 e incrementar su salario en 10 %.Muestralo como un array de objetos
+        // Código:
+
+        const empleados = [
+            { name: "Alice", salary: 2500 },
+            { name: "Bob", salary: 4000 },
+            { name: "Charlie", salary: 2000 }
+        ];
+
+
+        // Ejemplo 2: Queremos buscar productos y calcular el total del carrito.
+        // Enunciado: Tienes un array de productos con propiedades name, price, y inCart.Queremos calcular el costo total del carrito(usa también reduce).
+        // Código:
+
+        const products1 = [
+            { name: "Laptop", price: 1000, inCart: true },
+            { name: "Phone", price: 500, inCart: false },
+            { name: "Tablet", price: 300, inCart: true }
+        ];
+
+        // Ejemplo 3: Se pide calcular el precio total de todos los productos que estén en descuento previamente descontando un 10 % de su pvp.Tip: usa también reduce
+        // Código:
+
+        const products2 = [
+            { name: "Laptop", price: 1000, discounted: true },
+            { name: "Phone", price: 500, discounted: false },
+            { name: "Tablet", price: 300, discounted: true },
+            { name: "Monitor", price: 200, discounted: true }
+        ];
+
+        // Ejemplo 4: Encontrar el empleado con el salario más alto en un departamento específico("Engineering")
+        // Código:
+
+        const employees = [
+            { name: "Alice", salary: 3000, department: "HR" },
+            { name: "Bob", salary: 5000, department: "Engineering" },
+            { name: "Charlie", salary: 4000, department: "Engineering" },
+            { name: "Dave", salary: 3500, department: "HR" }
+        ];
+    </script>
+</body>
+
+</html>
