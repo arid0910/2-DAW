@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$ ejercicios sencillos</title>
+    <title>Ejercicios sencillos</title>
 </head>
 
 <body>
@@ -19,7 +19,8 @@
             { name: "Charlie", salary: 2000 }
         ];
 
-
+        console.log("---- Ejercicio 1 ----")
+        console.log(empleados.filter(e => e.salary < 3000).map(e => ({name: e.name, salary: e.salary * 1.1})))
         // Ejemplo 2: Queremos buscar productos y calcular el total del carrito.
         // Enunciado: Tienes un array de productos con propiedades name, price, y inCart.Queremos calcular el costo total del carrito(usa también reduce).
         // Código:
@@ -29,6 +30,9 @@
             { name: "Phone", price: 500, inCart: false },
             { name: "Tablet", price: 300, inCart: true }
         ];
+
+        console.log("---- Ejercicio 2 ----")
+        console.log(products1.filter(p => p.inCart === true).reduce((acc , p) => acc + p.price, 0))
 
         // Ejemplo 3: Se pide calcular el precio total de todos los productos que estén en descuento previamente descontando un 10 % de su pvp.Tip: usa también reduce
         // Código:
@@ -40,6 +44,8 @@
             { name: "Monitor", price: 200, discounted: true }
         ];
 
+        console.log("---- Ejercicio 3 ----")
+        console.log(products2.filter(p => p.discounted === true).reduce((acc, p) => acc + p.price,0))
         // Ejemplo 4: Encontrar el empleado con el salario más alto en un departamento específico("Engineering")
         // Código:
 
@@ -49,6 +55,11 @@
             { name: "Charlie", salary: 4000, department: "Engineering" },
             { name: "Dave", salary: 3500, department: "HR" }
         ];
+
+        console.log("---- Ejercicio 4 ----")
+        console.log(employees
+        .filter(e => e.department === "Engineering")
+        .reduce((acc, e) => acc.salary > e.salary ? acc : e))
     </script>
 </body>
 
