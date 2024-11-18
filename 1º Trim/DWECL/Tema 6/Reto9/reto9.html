@@ -26,15 +26,19 @@
                 } else {
                     let li = document.createElement("li");
 
-                    let propietario = xungos.filter(x => x.carros.includes(c)).map(x => x.nombre);
-                    let contenido = document.createTextNode(propietario > 0 ? c + " de " + propietario : c);
+                    let propietarios = xungos
+                        .filter(x => x.carros.includes(c))
+                        .map(x => x.nombre);
+
+                    let contenido = propietarios.length > 0
+                        ? `${c} de ${propietarios.join(", ")}`
+                        : c;
 
                     li.appendChild(document.createTextNode(contenido));
                     ulPadre.appendChild(li);
                 }
             });
         }
-
         lista(carrakos, document.getElementById("carrakos"));
     </script>
 </body>

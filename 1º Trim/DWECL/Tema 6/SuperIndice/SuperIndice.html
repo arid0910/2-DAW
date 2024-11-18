@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMBIAR SUPERINDICES 2 POR 3 DESDE UN NODO CONCRETO DEL DOM</title>
+</head>
+
+<body>
+    <div id="busca">
+        <p>Texto normal.<sub>subindice</sub> T<sup>2</sup>T<sup>22</sup></p>
+        <li>
+            Otro superindice T<sup>2</sup>T<sup>22</sup>
+        </li>
+        <p>Texto normal.<sup>Texto superíndice.</sup></p>
+        <p>Ecuación:X<sup>2</sup>+3X+1</p>
+    </div>
+
+    <button onclick="superIndices(document.getElementById('busca'))">Click Me</button>
+    
+    <script>
+        function superIndices(obj) {
+            for (let i = 0; i < obj.children.length; i++) {
+                //console.log(obj.children[i].tagName+"->"+obj.children[i].innerHTML)
+                superIndices(obj.children[i])
+                if (obj.children[i].tagName == "SUP" && obj.children[i].innerHTML == "2") obj.children[i].innerHTML = "3"
+                //obj.innerHTML = obj.innerHTML.replace("<sup>2</sup>","<sup>3</sup>")
+            }
+        }
+    </script>
+</body>
+
+</html>
