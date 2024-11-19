@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+main{
+    display: flex;
+    flex-flow: column;
+    max-width: 75vw;
+    align-items: center;
+}
+
+h2{
+    font-weight: lighter;
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-flow: column;
+}
+
+form input, select {
+    margin-bottom: 1rem;
+    padding: .5rem;
+    background-color: whi;
+}
+
+form input{
+    border-radius: 3px;
+}
+
+form input[type="submit"]{
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    align-self: center;
+}
+
+form div input, form div select{
+    border: none;
+    background-color: white;
+}
+
+form div{
+    border: solid 1px black;
+}
