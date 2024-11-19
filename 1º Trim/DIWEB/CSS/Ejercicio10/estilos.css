@@ -26,7 +26,7 @@ form{
 form input, select {
     margin-bottom: 1rem;
     padding: .5rem;
-    background-color: whi;
+    background-color: white;
 }
 
 form input{
@@ -40,11 +40,20 @@ form input[type="submit"]{
     align-self: center;
 }
 
-form div input, form div select{
-    border: none;
-    background-color: white;
+form div {
+    border: solid 1px black;
+    margin-bottom: 1rem;
 }
 
-form div{
-    border: solid 1px black;
+#pais {
+    padding: .5rem;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+
+form div input[type="tel"] {
+    border: none;
+    padding: .5rem;
+    margin: 0;
 }
