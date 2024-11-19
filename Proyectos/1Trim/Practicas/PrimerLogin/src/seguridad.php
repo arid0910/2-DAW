@@ -30,7 +30,7 @@
     //He pasado el control de baneao. Ahora miro la inacrividad
     if(time() - $_SESSION["ultm_accion"] >INACTIVIDAD*60){
         session_unset(); 
-        $_SESSION["mensaje_seguridad"] = "Su tiempo a expirado.Por favor haz el loguin de nuevo";
+        $_SESSION["mensaje_seguridad"] = "Su tiempo a expirado.Por favor haz el loguin de nuevo-";
         header("Location:index.php");
         exit;   
     }
