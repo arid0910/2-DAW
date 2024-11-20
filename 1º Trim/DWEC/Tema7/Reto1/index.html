@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <h3>Introduce el usuario y contraseña</h3>
+        <input type="text" name="usuario" id="usuario" > <br>
+        <input type="password" name="clave" id="clave">
+    </form>
+    <button type="submit" name="btnLogin" onclick="muestraSugerencia(document.getElementById('usuario').value, document.getElementById('clave').value)">Login</button>
+    <p id="txtLogin"></p>
+
+    <script>
+        function muestraSugerencia(usuario , clave) {
+            //Para cuando le des al boton no se recargen los datos de la pagina
+            event.preventDefault();
+            if (clave.length == 0 || usuario.length == 0) {
+                document.getElementById("txtLogin").innerHTML = "Campos vacios!!";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtLogin").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "http://localhost/2%C2%BA%20DAW/1%c2%ba%20Trim/DWEC/Tema7/Reto1/getSugerencia.php?param=" + usuario + "&param2=" + clave, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+</body>
+
+</html>
