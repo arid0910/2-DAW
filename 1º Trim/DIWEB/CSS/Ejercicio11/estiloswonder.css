@@ -13,7 +13,7 @@ body {
 	color: grey;
 }
 
-/*Estilo para todos los enlaces de la web*/
+/*Estilo para todos los enlaces de la web*/ 
 a {
 	color: grey;
 	text-decoration: none;
@@ -39,6 +39,31 @@ header {
 
 }
 
+/*Animacion de menu hamburguesa*/
+header>nav#menu-principal label{
+	display: inline-block;
+	position: relative;
+	width: 2.5rem;
+	height: 2.5rem;
+
+}
+
+header>nav#menu-principal label span.hamburguer-line{
+	background-color: rgb(107, 107, 107);
+	position: absolute;
+	top: 1.11rem;
+	width: 2.5rem;
+	height: .2rem;
+	border-radius: 3px;
+}
+
+header>nav#menu-principal label span:nth-child(1){
+	top:0;
+}
+
+header>nav#menu-principal label span:nth-child(3){
+	top:2.1rem;
+}
 /*La hamburguesa la colocamos al principio*/
 header>nav#menu-principal {
 	display: flex;
@@ -69,7 +94,6 @@ header>nav#menu-principal> ul#menu {
 /*El menu principal se muestra si esta cjecked o no*/
 input#hamburguesa:checked + ul#menu {
 	display: block;
-	order: 2;
 }
 
 /*En segunda posición está el buscador*/
