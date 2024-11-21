@@ -20,7 +20,7 @@ else
     $usuario=$_POST["usuario"];
     $email=$_POST["dni"];
     $sexo=$_POST["sexo"];
-    $tipo=$detalles_usuario["tipo"];
+    $tipo=$_POST["tipo"];
     $foto_bd=$_POST["foto_bd"];
 }
 ?>

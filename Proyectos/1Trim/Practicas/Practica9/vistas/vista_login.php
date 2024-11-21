@@ -5,6 +5,7 @@ if(isset($_POST["btnLogin"]))
     $error_usuario=$_POST["usuario"]=="";
     $error_clave=$_POST["clave"]=="";
     $error_form_login=$error_usuario || $error_clave;
+
     if(!$error_form_login)
     {
         //consulta a la BD y si está inicio sesión y salto a index
@@ -36,9 +37,11 @@ if(isset($_POST["btnLogin"]))
                 exit;
 
             }
-            else
+            else{
+                mysqli_close($conexion);
                 $error_usuario=true;
-
+            }
+                
         }
         catch(Exception $e)
         {
@@ -88,7 +91,10 @@ if(isset($_POST["btnLogin"]))
             }
             ?>
         </p>
-        <p><button name="btnLogin" type="submit">Login</button></p>
+        <p>
+            <button name="btnLogin" type="submit">Login</button>
+            <button name="btnRegistrar" type="submit">Regitrar</button>
+        </p>
     </form>
     <?php
     if(isset($_SESSION["mensaje_seguridad"]))

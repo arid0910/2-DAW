@@ -139,8 +139,10 @@ if(isset($_POST["btnContEditar"]))
                     }
                 }
             }
-            else
+            else{
                 $_SESSION["mensaje_accion"]="Usuario editado con éxito, pero con la imagen por defecto";
+            }
+               
         }
 
         header("Location:index.php");
@@ -190,7 +192,7 @@ if(isset($_POST["btnContAgregar"]))
 
         try
         {
-            $consulta="insert into usuarios (nombre, usuario, clave, dni, sexo) values ('".$_POST["nombre"]."','".$_POST["usuario"]."','".md5($_POST["clave"])."','".strtoupper($_POST["dni"])."','".$_POST["sexo"]."')";
+            $consulta="insert into usuarios (nombre, usuario, clave, dni, sexo, tipo) values ('".$_POST["nombre"]."','".$_POST["usuario"]."','".md5($_POST["clave"])."','".strtoupper($_POST["dni"])."','".$_POST["sexo"]."','".$_POST["tipo"]."')";
             mysqli_query($conexion,$consulta);
         }
         catch(Exception $e)
@@ -289,6 +291,7 @@ catch(Exception $e)
     if(isset($_SESSION["mensaje_accion"]))
     {
         echo "<p class='mensaje'>¡¡ ".$_SESSION["mensaje_accion"]." !!</p>";
+        unset($_SESSION["mensaje_accion"]);
     }
 
     require "vistas/vista_tabla_principal.php";
