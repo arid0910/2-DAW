@@ -82,12 +82,12 @@ try{
                 for ($i=0; $i < count(HORAS); $i++) {
                     echo "<tr>"; 
                         echo "<th>".HORAS[$i]."</th>";
-                        for ($i=0; $i < count(DIAS); $i++) { 
-                            echo "<td>
-                                    <span><a href='#'>Edit</span>
-                                  </td>";
-                        }
                     echo "</tr>";
+                    if($i == 3){
+                        echo "<tr>"; 
+                            echo "<td colspan='6'>Recreo</td>";
+                        echo "</tr>";
+                    }
                 }
                     
                 echo "<table>";
