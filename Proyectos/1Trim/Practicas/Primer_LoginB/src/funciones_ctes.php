@@ -1,12 +1,9 @@
 <?php
-
 const SERVIDOR_BD="localhost";
 const USUARIO_BD="jose";
 const CLAVE_BD="josefa";
-const NOMBRE_BD="bd_horario_exam2";
+const NOMBRE_BD="bd_cv2";
 
-const DIAS=ARRAY(1=>"Lunes","Martes","Miércoles","Jueves","Viernes");
-const HORAS=ARRAY(1=>"8:15 - 9:15","9:15 - 10:15","10:15 - 11:15","11:15 - 11:45","11:45 - 12:45", "12:45 - 13:45" ,"13:45 - 14:45" );
 const INACTIVIDAD=5; ///MINUTOS
 
 function error_page($title,$body)
@@ -21,4 +18,3 @@ function error_page($title,$body)
     <body>'.$body.'</body></html>';
 
 }
-?>

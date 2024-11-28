@@ -16,23 +16,18 @@ if(isset($_SESSION["usuario"]))
     //consulta a la BD y si está inicio sesión y salto a index
     require "src/seguridad.php";
 
-    // Muestro vista después de Login
-    if($datos_usuario_log["tipo"] == "normal"){
+    if ($datos_usuario_log["tipo"] == "normal") {
         require "vistas/vista_normal.php";
     } else {
-        require "vistas/vista_admin.php";
+        header("Location: admin/index.php");
+        exit;
     }
 
     mysqli_close($conexion);
 }
 else
 {
-    if(isset($_POST["btnRegistrar"]) || isset($_POST["btnContRegistrar"])){
-        require "vistas/vista_registrar.php";
-    } else {
-        require "vistas/vista_login.php";
-    }
-    
+    require "vistas/vista_login.php";
 }
 
 
