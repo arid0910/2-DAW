@@ -27,7 +27,7 @@ if(mysqli_num_rows($result_select)<=0)
     mysqli_free_result($result_select);
     session_unset();
     $_SESSION["mensaje_seguridad"]="Usted ya no se encuentra registrado en la BD";
-    header("Location:index.php");
+    header("Location:".$salto);
     exit;
 }
 else
@@ -44,7 +44,7 @@ if(time()-$_SESSION["ultm_accion"]>INACTIVIDAD*60)
 {
     session_unset();
     $_SESSION["mensaje_seguridad"]="Su tiempo de sesión ha expirado. Por favor, vuelva a loguearse";
-    header("Location:index.php");
+    header("Location:".$salto);
     exit;
 }
 
