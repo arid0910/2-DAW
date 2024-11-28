@@ -19,7 +19,7 @@ body {
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 40px; /* Espaciado entre los campos */
+    gap: 40px; 
 }
 
 .form input {
@@ -39,7 +39,7 @@ body {
 
 .lbl {
     position: relative;
-    display: block; /* Asegura que abarque todo el ancho */
+    display: block; 
 }
 
 .lbl span {
@@ -54,7 +54,7 @@ body {
 
 .form input:focus + .lbl span,
 .form input:valid + .lbl span {
-    transform: translateY(-30px); /* Sube el label */
+    transform: translateY(-30px);
     font-size: 14px;
     color: #2ecece;
 }
