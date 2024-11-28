@@ -2,7 +2,20 @@
 session_name("primer_login");
 session_start();
 require "../src/funciones_ctes.php";
-require "../src/seguridad.php";
+
+if(isset($_SESSION["usuario"])){
+    require "../src/seguridad.php";
+
+    if($datos_usuario_log["tipo"] == "normal"){
+        header("Location: ../index.php");
+        exit;
+    } 
+    
+} else {
+    header("Location: ../index.php");
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,10 +46,7 @@ require "../src/seguridad.php";
         <h3>Eres Admin</h3>
     </div>
     <?php
-        if($datos_usuario_log["tipo"] == "normal"){
-            header("Location: ../index.php");
-            exit;
-        }
+        
     ?>
 </body>
 

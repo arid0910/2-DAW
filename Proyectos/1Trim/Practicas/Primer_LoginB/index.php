@@ -19,6 +19,7 @@ if(isset($_SESSION["usuario"]))
     if ($datos_usuario_log["tipo"] == "normal") {
         require "vistas/vista_normal.php";
     } else {
+        mysqli_close($conexion);
         header("Location: admin/index.php");
         exit;
     }
