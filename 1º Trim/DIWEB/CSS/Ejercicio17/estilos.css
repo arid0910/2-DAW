@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b1721;
+}
+
+.form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Espaciado entre los campos */
+}
+
+.form input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    background: none;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #c7c7c7;
+    outline: none;
+}
+
+.form input:focus {
+    border-bottom: 2px solid #2ecece;
+}
+
+.lbl {
+    position: relative;
+    display: block; /* Asegura que abarque todo el ancho */
+}
+
+.lbl span {
+    position: absolute;
+    left: 0;
+    bottom: 3rem;
+    color: #fff;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.form input:focus + .lbl span,
+.form input:valid + .lbl span {
+    transform: translateY(-30px); /* Sube el label */
+    font-size: 14px;
+    color: #2ecece;
+}
