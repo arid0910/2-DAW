@@ -22,7 +22,7 @@ div.row > div.columns > ul.polaroids{
     flex-flow: row wrap;
     list-style: none;
     justify-content: center;
-    gap:2.5rem;
+    gap:3rem;
     padding-left: 0;
 }
 
