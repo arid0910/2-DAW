@@ -119,15 +119,6 @@ main section#sec-hombre article.item-sec span{
     font-weight: bold;
 }
 
-/* Version tablet */
-
-@media(min-width:750px){
-    main section#sec-hombre article.item-sec{
-        flex: 0 0 33%;
-    }
-
-}
-
 /* FOOTER */
 footer{
     display: flex;
@@ -172,4 +163,18 @@ footer > small{
     text-align: center;
     padding: 2rem;
     font-size: 1.5rem;
+}
+
+/* Version tablet */
+
+@media(min-width:750px){
+    main section#sec-hombre article.item-sec{
+        flex: 0 0 33%;
+    }
+
+}
+
+/* Version Escritorio */
+@media(min-width:1024px){
+    
 }
