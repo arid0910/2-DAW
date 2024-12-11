@@ -82,9 +82,10 @@ if(isset($_SESSION["mensaje_accion"])){
 
 <body>
     <?php
+    
     require "vistas/vista_principal_login.php";
 
-    if (isset($_POST["btnEntrar"])) {
+    if (isset($_POST["btnEntrar"]) && isset($_SESSION["usuario"])) {
         if ($tupla_usuario_login["tipo"] == "normal") {
             header("Location: vistas/vista_normal.php");
             exit;
