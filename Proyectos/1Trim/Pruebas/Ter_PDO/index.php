@@ -43,7 +43,7 @@
             echo "<p>El nombre del usuario conectado es: ".$tupla["nombre"]."</p>";
         }
 
-        //Cerrar conexioón
+        //Cerrar conexión
         $conexion=null;
     ?>
 </body>
