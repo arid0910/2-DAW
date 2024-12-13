@@ -13,11 +13,4 @@ function error_page($title,$body)
         $html.='<body>'.$body.'</body></html>';
         return $html;
     }
-
-if((time()-$_SESSION["inactividad"]) > INACTIVIDAD*60){
-    session_unset();
-    $_SESSION["mensaje_accion"] = "El tiempo a expirado";
-    header("Location: ../index.php");
-    exit;
-}
 ?>

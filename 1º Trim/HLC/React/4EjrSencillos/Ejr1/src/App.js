@@ -1,28 +1,40 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert, Button } from 'reactstrap';
-import { Component } from 'react'
+import { Component } from 'react';
 
 class App extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
-    this.state={
-     
-    }
+    this.state = {
+      visibilidadAlerta: false,
+      mensajeAlerta: '',
+      colorAlerta: '',
+    };
   }
 
-  alertaRojo(){
-    <Alert>Hola</Alert>
+  verAlerta(color, message) {
+    this.setState({
+      visibilidadAlerta: true,
+      mensajeAlerta: message,
+      colorAlerta: color,
+    });
   }
 
-  render(){
+  cerrarAlerta = () => {
+    this.setState({ visibilidadAlerta: false });
+  };
+
+  render() {
     return (
       <div className="App">
-        <Button color='primary' onClick={()=>this.alerta()}>Click Me</Button>
-        <Button color='danger' onClick={()=>this.alerta()}>Click Me</Button>
+        {this.state.visibilidadAlerta && (<Alert color={this.state.colorAlerta} toggle={this.cerrarAlerta}>{this.state.mensajeAlerta}</Alert>)}
+        <Button color="primary" onClick={() => this.verAlerta('primary', 'Botón Azul')}>Botón Azul</Button>
+        <Button color="danger" onClick={() => this.verAlerta('danger', 'Botón Rojo')}>Botón Rojo</Button>
       </div>
     );
   }
 }
+
 export default App;

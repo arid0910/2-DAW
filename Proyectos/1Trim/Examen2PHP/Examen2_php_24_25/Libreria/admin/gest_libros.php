@@ -39,6 +39,7 @@
         header("Location: ../index.php");
         exit;
         $_SESSION["mensaje_accion"] = "No eres admin no te puedes colar";
+        session_unset();
     }
 ?>
 <!DOCTYPE html>
