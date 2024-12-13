@@ -17,7 +17,7 @@ if(isset($_SESSION["usuario"]))
     require "src/seguridad.php";
 
     // Muestro vista después de Login
-    if($datos_usuario_log["tipo"] == "normal"){
+    if(@$datos_usuario_log["tipo"] == "normal"){
         require "vistas/vista_normal.php";
     } else {
         require "vistas/vista_admin.php";
