@@ -31,7 +31,6 @@ if (isset($_POST["btnEntrar"])) {
                 $_SESSION["usuario"] = $_POST["usuario"];
                 $_SESSION["clave"] = $_POST["clave"];
                 $_SESSION["tipo"] = $tupla_usuario_login["tipo"];
-                $_SESSION["inactividad"] = time();
                 $usuario_valido = true;
             }
         } catch (Exception $e) {
