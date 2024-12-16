@@ -1,62 +1,86 @@
 <?php
+
 if(isset($_POST["btnLogin"]))
-{
-    //compruebo errores
+{   
     $error_usuario=$_POST["usuario"]=="";
     $error_clave=$_POST["clave"]=="";
     $error_form_login=$error_usuario || $error_clave;
     if(!$error_form_login)
     {
-        //consulta a la BD y si está inicio sesión y salto a index
-        try {
-            $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD . "", USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-        } catch (PDOException $e) {
-            die(error_page("Ter_PDO", "<p>No se ha podido conectar a la BD: " . $e->getMessage() . "</p>"));
-        }
-
+       
         // Me he conectado y ahora hago la consulta
-
-        try {
-            $consulta = "select usuario from usuarios where usuario = ? and clave = ?";
+        try
+        {
+            $consulta="select tipo from usuarios where lector='?' AND clave='?'";
             $result_select=$conexion->prepare($consulta);
             $result_select->execute([$_POST["usuario"], md5($_POST["clave"])]);
 
             if($result_select->rowCount() > 0)
             {
                 //El usuario se encuentra registrado y tengo que iniciar session
+                $datos_usu_log=$result_select->fetchAll(PDO::FETCH_ASSOC);
+                $result_select=null;
                 $conexion=null;
-                $_SESSION["usuario"]=$_POST["usuario"];
+                $_SESSION["lector"]=$_POST["usuario"];
                 $_SESSION["clave"]=md5($_POST["clave"]);
-                $_SESSION["ultm_accion"]=time();
-                header("Location:index.php");
+                $_SESSION["ultima_accion"]=time();
+
+                if($datos_usu_log["tipo"]=="normal")                
+                    header("Location:index.php");
+                else
+                    header("Location:admin/gest_libros.php");
                 exit;
 
             }
             else
+            {
+                $result_select=null;
                 $error_usuario=true;
-        } catch (PDOException $e) {
-            $result_select=null;
+            }
+                
+
+        }
+        catch(PDOException $e)
+        {
             $conexion=null;
             session_destroy();
-            die(error_page("Ter_PDO", "<p>No se ha podido hacer la consulta: " . $e->getMessage() . "</p>"));
+            die(error_page("Práctica 9","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
         }
+
     }
 }
 
+
+try{
+    $consulta = "select * from libros";
+    $result_libros=$conexion->prepare($consulta);
+    $result_libros->execute();
+    $tupla_result_libros= $result_libros->fetchAll(PDO::FETCH_ASSOC);
+}
+catch(PDOException $e){
+    session_destroy();
+    $conexion=null;
+    die(error_page("Examen2 Php","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
+}
+
+
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer Login</title>
+    <title>Examen2 Php</title>
     <style>
+        .contenedor_libros{display:flex;flex-wrap: wrap;}
+        .contenedor_libros div{width:30%;text-align:center}
+        .contenedor_libros div img{height:150px}
+        .mensaje{font-size:1.25em;color:blue}
         .error{color:red}
-        .mensaje{color:blue;font-size:1.25rem}
     </style>
 </head>
 <body>
-    <h1>Primer Login</h1>
+    <h1>Libreria</h1>
     <form action="index.php" method="post">
         <p>
             <label for="usuario">Usuario: </label>
@@ -71,7 +95,7 @@ if(isset($_POST["btnLogin"]))
             }
             ?>
         </p>
-        <p> 
+        <p>
             <label for="clave">Contraseña: </label>
             <input type="password" name="clave" id="clave"/>
             <?php
@@ -81,14 +105,20 @@ if(isset($_POST["btnLogin"]))
             }
             ?>
         </p>
-        <p><button name="btnLogin" type="submit">Login</button></p>
+        <p>
+            <button name="btnLogin" type="submit">Login</button> 
+        </p>
     </form>
     <?php
-    if(isset($_SESSION["mensaje_seguridad"]))
+    if(isset($_SESSION["seguridad"]))
     {
-        echo "<p class='mensaje'>".$_SESSION["mensaje_seguridad"]."</p>";
+        echo "<p class='mensaje'>".$_SESSION["seguridad"]."</p>";
         session_destroy();
     }
+
+    require "vistas/libros_tres_en_tres.php";
     ?>
+   
+
 </body>
 </html>

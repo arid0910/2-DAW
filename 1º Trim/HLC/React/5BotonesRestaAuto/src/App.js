@@ -20,10 +20,12 @@ class App extends Component {
   }
 
   //Esto es mi call back
-  clickBtn(numBtn) {
+  handlerOnclickBtn(numBtn) {
     let auxBotones = this.state.botones
 
+    //Cunado se le da click se suma uno al boton
     auxBotones[numBtn].cont += 1
+
     if (auxBotones[numBtn].cont >= 1) {
       auxBotones[numBtn].color = "primary";
     }
@@ -37,7 +39,7 @@ class App extends Component {
     const resta = () =>{
       if(auxBotones[numBtn].cont > 0){
         auxBotones[numBtn].cont--
-
+        
         if(auxBotones[numBtn].cont === 0){
           auxBotones[numBtn].color = "secondary"
         }
@@ -61,11 +63,11 @@ class App extends Component {
           {/* // RENDERIZA AQUÍ LO QUE NECESITES */}
           {/* Pasar callback a botoncillo */}
           {/* Le tenemos ue pasar a Botonciilo que numBtn es */}
-          <Botoncillo color={this.state.botones[0].color} cont={this.state.botones[0].cont} pos={0} click={(n) => this.clickBtn(n)} />
-          <Botoncillo color={this.state.botones[1].color} cont={this.state.botones[1].cont} pos={1} click={(n) => this.clickBtn(n)} />
-          <Botoncillo color={this.state.botones[2].color} cont={this.state.botones[2].cont} pos={2} click={(n) => this.clickBtn(n)} />
-          <Botoncillo color={this.state.botones[3].color} cont={this.state.botones[3].cont} pos={3} click={(n) => this.clickBtn(n)} />
-          <Botoncillo color={this.state.botones[4].color} cont={this.state.botones[4].cont} pos={4} click={(n) => this.clickBtn(n)} />
+          <Botoncillo color={this.state.botones[0].color} cont={this.state.botones[0].cont} pos={0} click={(n) => this.handlerOnclickbtn(n)} />
+          <Botoncillo color={this.state.botones[1].color} cont={this.state.botones[1].cont} pos={1} click={(n) => this.handlerOnclickbtn(n)} />
+          <Botoncillo color={this.state.botones[2].color} cont={this.state.botones[2].cont} pos={2} click={(n) => this.handlerOnclickbtn(n)} />
+          <Botoncillo color={this.state.botones[3].color} cont={this.state.botones[3].cont} pos={3} click={(n) => this.handlerOnclickbtn(n)} />
+          <Botoncillo color={this.state.botones[4].color} cont={this.state.botones[4].cont} pos={4} click={(n) => this.handlerOnclickbtn(n)} />
 
         </header>
       </div>

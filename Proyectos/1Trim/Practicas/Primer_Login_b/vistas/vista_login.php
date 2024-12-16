@@ -8,38 +8,52 @@ if(isset($_POST["btnLogin"]))
     if(!$error_form_login)
     {
         //consulta a la BD y si está inicio sesión y salto a index
-        try {
-            $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD . "", USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-        } catch (PDOException $e) {
-            die(error_page("Ter_PDO", "<p>No se ha podido conectar a la BD: " . $e->getMessage() . "</p>"));
+        try
+        {
+            @$conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
+            mysqli_set_charset($conexion,"utf8");
         }
-
+        catch(Exception $e)
+        {
+            session_destroy();
+            die(error_page("Primer Login b","<p>No se ha podido conectar a la BD: ".$e->getMessage()."</p>"));
+        }
         // Me he conectado y ahora hago la consulta
-
-        try {
-            $consulta = "select usuario from usuarios where usuario = ? and clave = ?";
-            $result_select=$conexion->prepare($consulta);
-            $result_select->execute([$_POST["usuario"], md5($_POST["clave"])]);
-
-            if($result_select->rowCount() > 0)
+        try
+        {
+            $consulta="select tipo from usuarios where usuario='".$_POST["usuario"]."' AND clave='".md5($_POST["clave"])."'";
+            $result_select=mysqli_query($conexion,$consulta);
+            $n_tuplas=mysqli_num_rows($result_select);
+            if($n_tuplas>0)
             {
                 //El usuario se encuentra registrado y tengo que iniciar session
-                $conexion=null;
+                $tupla=mysqli_fetch_assoc($result_select);
+                mysqli_free_result($result_select);
+                mysqli_close($conexion);
                 $_SESSION["usuario"]=$_POST["usuario"];
                 $_SESSION["clave"]=md5($_POST["clave"]);
                 $_SESSION["ultm_accion"]=time();
-                header("Location:index.php");
+                if($tupla["tipo"]=="normal")
+                    header("Location:index.php");
+                else
+                    header("Location:admin/index.php");
                 exit;
 
             }
             else
+            {
+                mysqli_close($conexion);
                 $error_usuario=true;
-        } catch (PDOException $e) {
-            $result_select=null;
-            $conexion=null;
-            session_destroy();
-            die(error_page("Ter_PDO", "<p>No se ha podido hacer la consulta: " . $e->getMessage() . "</p>"));
+            }
+
         }
+        catch(Exception $e)
+        {
+            mysqli_close($conexion);
+            session_destroy();
+            die(error_page("Primer Login b","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
+        }
+
     }
 }
 
@@ -49,14 +63,14 @@ if(isset($_POST["btnLogin"]))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer Login</title>
+    <title>Primer Login b</title>
     <style>
         .error{color:red}
         .mensaje{color:blue;font-size:1.25rem}
     </style>
 </head>
 <body>
-    <h1>Primer Login</h1>
+    <h1>Primer Login b</h1>
     <form action="index.php" method="post">
         <p>
             <label for="usuario">Usuario: </label>
@@ -71,7 +85,7 @@ if(isset($_POST["btnLogin"]))
             }
             ?>
         </p>
-        <p> 
+        <p>
             <label for="clave">Contraseña: </label>
             <input type="password" name="clave" id="clave"/>
             <?php
