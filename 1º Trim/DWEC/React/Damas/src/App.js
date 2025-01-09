@@ -8,8 +8,8 @@ function Botonera(props) {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 4; j++) {
 
-        if (!(i % 2)) {
-          tabla.push(<Button color={props.liBtn[0]}></Button>)
+        if (!(i % 2 === 0)) {
+          tabla.push(<Button outline></Button>)
         }
 
         if (i > 4) {
@@ -18,8 +18,8 @@ function Botonera(props) {
           tabla.push(<Button color={props.liBtn[2]}></Button>)
         }
 
-        if (i % 2) {
-          tabla.push(<Button color={props.liBtn[0]}></Button>)
+        if (i % 2 === 0) {
+          tabla.push(<Button outline></Button>)
         }
       }
       tabla.push(<br />)
@@ -38,7 +38,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      listaBotones: ["", "success", "secondary"],
+      listaBotones: ["outline", "success", "secondary"],
       playable: false
     }
   }
