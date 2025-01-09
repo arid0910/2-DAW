@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Botonera(props) {
   let tabla = []
-  // if (props.jugable) {
+  if (props.jugable) {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 4; j++) {
 
@@ -24,7 +24,7 @@ function Botonera(props) {
       }
       tabla.push(<br />)
     }
-  // }
+  }
 
 
   return (
@@ -44,9 +44,17 @@ class App extends Component {
   }
 
   jugar() {
-    this.setState = {
-      playable: true
+    let aux = this.state.playable
+
+    if(aux){
+      aux = false
+    }else{
+      aux = true
     }
+
+    this.setState ({
+      playable: aux
+    })
   }
 
   render() {
