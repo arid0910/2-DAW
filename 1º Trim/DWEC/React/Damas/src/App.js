@@ -8,7 +8,7 @@ function Botonera(props) {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 4; j++) {
 
-        if (!(i % 2 === 0)) {
+        if (!(i % 2)) {
           tabla.push(<Button outline></Button>)
         }
 
@@ -18,7 +18,7 @@ function Botonera(props) {
           tabla.push(<Button color={props.liBtn[2]}></Button>)
         }
 
-        if (i % 2 === 0) {
+        if (i % 2) {
           tabla.push(<Button outline></Button>)
         }
       }
