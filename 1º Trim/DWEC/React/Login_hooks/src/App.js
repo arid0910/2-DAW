@@ -20,7 +20,7 @@ class App extends Component {
       menuItem: item
     })
   }
-
+  
   render() {
     let obj = <Menu changeMenu={(item) => this.changeMenu(item)} />
 
