@@ -47,7 +47,7 @@ function obtener_producto($cod){
 
     //Hacemos la consulta
     try {
-        $consulta = "select * from producto where cod=?";
+        $consulta = "select producto.*, familia.nombre as nombre_familia from producto, familia where producto.familia=familia.cod and producto.cod=?";
         $sentencia=$conexion->prepare($consulta);
         $sentencia->execute([$cod]);
     } catch (PDOException $e) {
@@ -141,7 +141,7 @@ function borrar_producto($cod){
     try {
         $consulta = "delete from producto where cod = ?";
         $sentencia=$conexion->prepare($consulta);
-        $sentencia->execute($cod);
+        $sentencia->execute([$cod]);
     } catch (PDOException $e) {
         $sentencia=null;
         $conexion=null;

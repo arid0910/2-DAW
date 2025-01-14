@@ -40,7 +40,7 @@ $app->put('/producto/actualizar/{cod}',function($request){
 });
 
 //E
-$app->delete('producto/borrar/{cod}', function($request){
+$app->delete('/producto/borrar/{cod}', function($request){
     $cod=$request->getAttribute("cod");
 
     echo json_encode(borrar_producto($cod));
@@ -52,7 +52,7 @@ $app->get('/familias',function(){
 });
 
 //G
-$app->get('repetido/{tabla}/{columna}/{valor}', function($request){
+$app->get('/repetido/{tabla}/{columna}/{valor}', function($request){
     $tabla=$request->getAttribute("tabla");
     $columna=$request->getAttribute("columna");
     $valor=$request->getAttribute("valor");
@@ -61,7 +61,7 @@ $app->get('repetido/{tabla}/{columna}/{valor}', function($request){
 });
 
 //H
-$app->get('repetido/{tabla}/{columna}/{valor}/{columna_id}/{valor_id}', function($request){
+$app->get('/repetido/{tabla}/{columna}/{valor}/{columna_id}/{valor_id}', function($request){
     $tabla=$request->getAttribute("tabla");
     $columna=$request->getAttribute("columna");
     $valor=$request->getAttribute("valor");
