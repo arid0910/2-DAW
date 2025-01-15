@@ -7,13 +7,13 @@
     <title>Reproductor musica</title>
     <script src="https://kit.fontawesome.com/5a86f3889e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/estilos.css">
-    <script src="js/funciones-reproductor-audio.js"></script>
+    <script src="js/funciones-reproductor-audio.js" defer></script>
 </head>
 
 <body>
-    <audio>
-        <source id="audioMP3" src="audio/hotel-california.mp3" type="audio/mp3">
-        <source id="audioOGG" src="audio/hotel-california.ogg" type="audio/ogg">
+    <audio id="audio">
+        <source  src="audio/hotel-california.mp3" type="audio/mp3">
+        <source  src="audio/hotel-california.ogg" type="audio/ogg">
     </audio>
 
     <div id="contReproductor">
