@@ -48,7 +48,7 @@ $app->delete('/producto/borrar/{cod}', function($request){
 
 //F 
 $app->get('/familias',function(){
-    echo json_encode(obtener_productos());
+    echo json_encode(obtener_familias());
 });
 
 //G

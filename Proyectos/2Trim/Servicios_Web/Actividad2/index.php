@@ -18,19 +18,21 @@ if (isset($_POST["btnAceptarBorrar"])) {
     }
 
     $_SESSION["mensaje"] = "Producto borrado con exito";
+    header("Location:index.php");
+    exit;
 }
 
 //Siempre esta
 $url = DIR_SERV . "/productos";
 $respuesta = consumir_servicios_REST($url, "GET");
-$json_delete = json_decode($respuesta, true);
+$json_productos = json_decode($respuesta, true);
 
-if (!$json_delete) {
+if (!$json_productos) {
     die("<p>Error consumiendo el servicio web <strong>" . $url . "</strong></p></body></html>");
 }
 
-if (isset($json_delete["error"])) {
-    die("<p>" . $json_delete["error"] . "</p></body></html>");
+if (isset($json_productos["error"])) {
+    die("<p>" . $json_productos["error"] . "</p></body></html>");
 }
 ?>
 
@@ -76,6 +78,10 @@ if (isset($json_delete["error"])) {
         .mensaje{
             color:blue;
         }
+
+        .error{
+            color: red;
+        }
     </style>
 </head>
 
@@ -108,7 +114,7 @@ if (isset($json_delete["error"])) {
 
         </tr>
         <?php
-        foreach ($json_delete["productos"] as $tupla) {
+        foreach ($json_productos["productos"] as $tupla) {
             echo "<tr>";
             echo "<td><form action='index.php' method='post'><button class='enlace' type='submit' name='btnDetalles' title='Ver Detalles' value='" . $tupla["cod"] . "'>" . $tupla["cod"] . "</button></form></td>";
             echo "<td>" . $tupla["nombre_corto"] . "</td>";
