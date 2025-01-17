@@ -100,6 +100,10 @@ if (isset($json_productos["error"])) {
     if(isset($_POST["btnInsertar"])){
         require "vistas/vista_insertar.php";
     }
+
+    if(isset($_POST["btnEditar"])){
+        require "vistas/vista_edotar.php";
+    }
     ?>
     <table>
         <tr>
