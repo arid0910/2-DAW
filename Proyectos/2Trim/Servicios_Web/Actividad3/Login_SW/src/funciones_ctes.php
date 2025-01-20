@@ -1,7 +1,6 @@
 <?php
-
-define("DIR_SERV","http://localhost/2DAW/Proyectos/2Trim/Servicios_Web/Actividad1/servicios_rest/");
-
+define("INACTIVIDAD",5);
+define("DIR_SERV","http://localhost/2DAW/Proyectos/2Trim/Servicios_Web/Actividad3/API_login");
  function consumir_servicios_REST($url,$metodo,$datos=null)
  {
      $llamada=curl_init();

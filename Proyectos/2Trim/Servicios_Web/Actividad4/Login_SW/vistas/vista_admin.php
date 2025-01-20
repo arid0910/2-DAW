@@ -1,242 +1,243 @@
 <?php
-session_name("Actividad2_SW_24_25");
-session_start();
-require "src/funciones_ctes.php";
-
-if(isset($_POST["btnContNuevo"]))
-{
-    $error_cod=$_POST["cod"]=="" || strlen($_POST["cod"])>12;
-    if(!$error_cod)
+    if(isset($_POST["btnContNuevo"]))
     {
-
-        $url=DIR_SERV."/repetido/producto/cod/".urlencode($_POST["cod"]);
-        $respuesta=consumir_servicios_REST($url,"GET");
-        $json_repetido=json_decode($respuesta,true);
-        if(!$json_repetido)
+        $error_cod=$_POST["cod"]=="" || strlen($_POST["cod"])>12;
+        if(!$error_cod)
         {
-            session_destroy();
-            die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+    
+            $url=DIR_SERV."/repetido/producto/cod/".urlencode($_POST["cod"]);
+            $respuesta=consumir_servicios_REST($url,"GET");
+            $json_repetido=json_decode($respuesta,true);
+            if(!$json_repetido)
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            }
+    
+            if(isset($json_repetido["error"]))
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            }
+    
+            $error_cod=$json_repetido["repetido"];
         }
-
-        if(isset($json_repetido["error"]))
+    
+        $error_nombre_corto=$_POST["nombre_corto"]=="";
+        if(!$error_nombre_corto)
         {
-            session_destroy();
-            die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            $url=DIR_SERV."/repetido/producto/nombre_corto/".urlencode($_POST["nombre_corto"]);
+            $respuesta=consumir_servicios_REST($url,"GET");
+            $json_repetido=json_decode($respuesta,true);
+            if(!$json_repetido)
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            }
+    
+            if(isset($json_repetido["error"]))
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            }
+    
+            $error_nombre_corto=$json_repetido["repetido"];
         }
-
-        $error_cod=$json_repetido["repetido"];
+        $error_descripcion=$_POST["descripcion"]=="";
+        $error_PVP=$_POST["PVP"]=="" || !is_numeric($_POST["PVP"]) || $_POST["PVP"]<=0;
+    
+        $error_form=$error_cod || $error_nombre_corto || $error_descripcion || $error_PVP;
+    
+        if(!$error_form)
+        {
+            //inserto y salto con mensaje
+    
+            $url=DIR_SERV."/producto/insertar";
+            unset($_POST["btnContNuevo"]);
+            $respuesta=consumir_servicios_REST($url,"POST",$_POST);
+            $json_insertar=json_decode($respuesta,true);
+            if(!$json_insertar)
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            }
+    
+            if(isset($json_insertar["error"]))
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>".$json_insertar["error"]."</p>"));
+            }
+    
+            $_SESSION["mensaje"]="¡¡ Producto insertado con éxito !!";
+            header("Location:index.php");
+            exit;
+    
+        }
+    
     }
-
-    $error_nombre_corto=$_POST["nombre_corto"]=="";
-    if(!$error_nombre_corto)
+    
+    if(isset($_POST["btnContEditar"]))
     {
-        $url=DIR_SERV."/repetido/producto/nombre_corto/".urlencode($_POST["nombre_corto"]);
-        $respuesta=consumir_servicios_REST($url,"GET");
-        $json_repetido=json_decode($respuesta,true);
-        if(!$json_repetido)
+       
+    
+        $error_nombre_corto=$_POST["nombre_corto"]=="";
+        if(!$error_nombre_corto)
         {
-            session_destroy();
-            die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            $url=DIR_SERV."/repetido/producto/nombre_corto/".urlencode($_POST["nombre_corto"])."/cod/".urlencode($_POST["cod"]);
+            $respuesta=consumir_servicios_REST($url,"GET");
+            $json_repetido=json_decode($respuesta,true);
+            if(!$json_repetido)
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            }
+    
+            if(isset($json_repetido["error"]))
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            }
+    
+            $error_nombre_corto=$json_repetido["repetido"];
         }
-
-        if(isset($json_repetido["error"]))
+        $error_descripcion=$_POST["descripcion"]=="";
+        $error_PVP=$_POST["PVP"]=="" || !is_numeric($_POST["PVP"]) || $_POST["PVP"]<=0;
+    
+        $error_form=$error_nombre_corto || $error_descripcion || $error_PVP;
+    
+        if(!$error_form)
         {
-            session_destroy();
-            die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            //edito y salto con mensaje
+    
+            $url=DIR_SERV."/producto/actualizar/".urlencode($_POST["cod"]);
+            unset($_POST["btnContEditar"]);
+            unset($_POST["cod"]);
+            $respuesta=consumir_servicios_REST($url,"PUT",$_POST);
+            $json_actualizar=json_decode($respuesta,true);
+            if(!$json_actualizar)
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+            }
+    
+            if(isset($json_actualizar["error"]))
+            {
+                session_destroy();
+                die(error_page("Actividad 2","<p>".$json_actualizar["error"]."</p>"));
+            }
+    
+            $_SESSION["mensaje"]="¡¡ Producto actualizado con éxito !!";
+            header("Location:index.php");
+            exit;
+    
         }
-
-        $error_nombre_corto=$json_repetido["repetido"];
+    
     }
-    $error_descripcion=$_POST["descripcion"]=="";
-    $error_PVP=$_POST["PVP"]=="" || !is_numeric($_POST["PVP"]) || $_POST["PVP"]<=0;
-
-    $error_form=$error_cod || $error_nombre_corto || $error_descripcion || $error_PVP;
-
-    if(!$error_form)
+    
+    if(isset($_POST["btnDetalles"]) || isset($_POST["btnEditar"]))
     {
-        //inserto y salto con mensaje
-
-        $url=DIR_SERV."/producto/insertar";
-        unset($_POST["btnContNuevo"]);
-        $respuesta=consumir_servicios_REST($url,"POST",$_POST);
-        $json_insertar=json_decode($respuesta,true);
-        if(!$json_insertar)
+        if(isset($_POST["btnDetalles"]))
+            $cod=$_POST["btnDetalles"];
+        else
+            $cod=$_POST["btnEditar"];
+    
+        $url=DIR_SERV."/producto/".urlencode($cod);
+        $respuesta=consumir_servicios_REST($url,"GET");
+        $json_detalles=json_decode($respuesta,true);
+        if(!$json_detalles)
         {
             session_destroy();
             die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
         }
-
-        if(isset($json_insertar["error"]))
+    
+        if(isset($json_detalles["error"]))
         {
             session_destroy();
-            die(error_page("Actividad 2","<p>".$json_insertar["error"]."</p>"));
+            die(error_page("Actividad 2","<p>".$json_detalles["error"]."</p>"));
         }
-
-        $_SESSION["mensaje"]="¡¡ Producto insertado con éxito !!";
+    }
+    
+    if(isset($_POST["btnContBorrar"]))
+    {
+        $url=DIR_SERV."/producto/borrar/".urlencode($_POST["btnContBorrar"]);
+        $respuesta=consumir_servicios_REST($url,"DELETE");
+        $json_borrar=json_decode($respuesta,true);
+        if(!$json_borrar)
+        {
+            session_destroy();
+            die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
+        }
+    
+        if(isset($json_borrar["error"]))
+        {
+            session_destroy();
+            die(error_page("Actividad 2","<p>".$json_borrar["error"]."</p>"));
+        }
+    
+        $_SESSION["mensaje"]="¡¡ Producto borrado con éxito !!";
         header("Location:index.php");
         exit;
-
+            
     }
-
-}
-
-if(isset($_POST["btnContEditar"]))
-{
-   
-
-    $error_nombre_corto=$_POST["nombre_corto"]=="";
-    if(!$error_nombre_corto)
+    
+    if(isset($_POST["btnNuevo"])||isset($_POST["btnContNuevo"])||isset($_POST["btnEditar"])||isset($_POST["btnContEditar"]))
     {
-        $url=DIR_SERV."/repetido/producto/nombre_corto/".urlencode($_POST["nombre_corto"])."/cod/".urlencode($_POST["cod"]);
+        $url=DIR_SERV."/familias";
         $respuesta=consumir_servicios_REST($url,"GET");
-        $json_repetido=json_decode($respuesta,true);
-        if(!$json_repetido)
+        $json_familias=json_decode($respuesta,true);
+        if(!$json_familias)
         {
             session_destroy();
             die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
         }
-
-        if(isset($json_repetido["error"]))
+    
+        if(isset($json_familias["error"]))
         {
             session_destroy();
-            die(error_page("Actividad 2","<p>".$json_repetido["error"]."</p>"));
+            die(error_page("Actividad 2","<p>".$json_familias["error"]."</p>"));
         }
-
-        $error_nombre_corto=$json_repetido["repetido"];
     }
-    $error_descripcion=$_POST["descripcion"]=="";
-    $error_PVP=$_POST["PVP"]=="" || !is_numeric($_POST["PVP"]) || $_POST["PVP"]<=0;
-
-    $error_form=$error_nombre_corto || $error_descripcion || $error_PVP;
-
-    if(!$error_form)
-    {
-        //edito y salto con mensaje
-
-        $url=DIR_SERV."/producto/actualizar/".urlencode($_POST["cod"]);
-        unset($_POST["btnContEditar"]);
-        unset($_POST["cod"]);
-        $respuesta=consumir_servicios_REST($url,"PUT",$_POST);
-        $json_actualizar=json_decode($respuesta,true);
-        if(!$json_actualizar)
-        {
-            session_destroy();
-            die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
-        }
-
-        if(isset($json_actualizar["error"]))
-        {
-            session_destroy();
-            die(error_page("Actividad 2","<p>".$json_actualizar["error"]."</p>"));
-        }
-
-        $_SESSION["mensaje"]="¡¡ Producto actualizado con éxito !!";
-        header("Location:index.php");
-        exit;
-
-    }
-
-}
-
-if(isset($_POST["btnDetalles"]) || isset($_POST["btnEditar"]))
-{
-    if(isset($_POST["btnDetalles"]))
-        $cod=$_POST["btnDetalles"];
-    else
-        $cod=$_POST["btnEditar"];
-
-    $url=DIR_SERV."/producto/".urlencode($cod);
+    
+    //Esto se va a hacer siempre
+    $url=DIR_SERV."/productos";
     $respuesta=consumir_servicios_REST($url,"GET");
-    $json_detalles=json_decode($respuesta,true);
-    if(!$json_detalles)
+    $json_productos=json_decode($respuesta,true);
+    if(!$json_productos)
     {
         session_destroy();
         die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
     }
-
-    if(isset($json_detalles["error"]))
+    
+    if(isset($json_productos["error"]))
     {
         session_destroy();
-        die(error_page("Actividad 2","<p>".$json_detalles["error"]."</p>"));
+        die(error_page("Actividad 2","<p>".$json_productos["error"]."</p>"));
     }
-}
-
-if(isset($_POST["btnContBorrar"]))
-{
-    $url=DIR_SERV."/producto/borrar/".urlencode($_POST["btnContBorrar"]);
-    $respuesta=consumir_servicios_REST($url,"DELETE");
-    $json_borrar=json_decode($respuesta,true);
-    if(!$json_borrar)
-    {
-        session_destroy();
-        die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
-    }
-
-    if(isset($json_borrar["error"]))
-    {
-        session_destroy();
-        die(error_page("Actividad 2","<p>".$json_borrar["error"]."</p>"));
-    }
-
-    $_SESSION["mensaje"]="¡¡ Producto borrado con éxito !!";
-    header("Location:index.php");
-    exit;
-        
-}
-
-if(isset($_POST["btnNuevo"])||isset($_POST["btnContNuevo"])||isset($_POST["btnEditar"])||isset($_POST["btnContEditar"]))
-{
-    $url=DIR_SERV."/familias";
-    $respuesta=consumir_servicios_REST($url,"GET");
-    $json_familias=json_decode($respuesta,true);
-    if(!$json_familias)
-    {
-        session_destroy();
-        die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
-    }
-
-    if(isset($json_familias["error"]))
-    {
-        session_destroy();
-        die(error_page("Actividad 2","<p>".$json_familias["error"]."</p>"));
-    }
-}
-
-//Esto se va a hacer siempre
-$url=DIR_SERV."/productos";
-$respuesta=consumir_servicios_REST($url,"GET");
-$json_productos=json_decode($respuesta,true);
-if(!$json_productos)
-{
-    session_destroy();
-    die(error_page("Actividad 2","<p>Error consumiendo el servico rest: <strong>".$url."</strong></p>"));
-}
-
-if(isset($json_productos["error"]))
-{
-    session_destroy();
-    die(error_page("Actividad 2","<p>".$json_productos["error"]."</p>"));
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 2</title>
+    <title>Login con SW</title>
     <style>
-        .centrado{width:85%;margin:1em auto}
-        .txt_centrado{text-align:center}
+        .enlinea{display:inline}
+        .enlace{background:none;border:none;color:blue;text-decoration: underline;cursor: pointer;}
         table,th,td{border:1px solid black}
         table{border-collapse:collapse}
         th{background-color:#CCC}
-        .enlace{border:none;background:none;text-decoration: underline;color:blue;cursor:pointer}
         .mensaje{font-size:1.25em; color:blue}
         .error{color:red}
+        .centrado{width:85%;margin:1em auto}
+        .txt_centrado{text-align:center}
     </style>
 </head>
 <body>
+    <h1>Login con SW</h1>
+    <div>
+        Bienvenido <strong><?php echo $datos_usuario_log["usuario"];?></strong> - <form class="enlinea" action="index.php" method="post"><button class="enlace" type="submit" name="btnCerrarSession">Salir</button></form>
+    </div>
+
     <h1 class="centrado txt_centrado">Listado de los productos</h1>
     <?php
 

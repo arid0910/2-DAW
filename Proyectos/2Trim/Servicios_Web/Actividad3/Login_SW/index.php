@@ -1,7 +1,8 @@
 <?php
-session_name("primer_login");
+session_name("Login_SW_24_25");
 session_start();
 require "src/funciones_ctes.php";
+
 
 if(isset($_POST["btnCerrarSession"]))
 {
@@ -17,17 +18,15 @@ if(isset($_SESSION["usuario"]))
     require "src/seguridad.php";
 
     // Muestro vista después de Login
-    if(@$datos_usuario_log["tipo"] == "normal"){
+    if($datos_usuario_log["tipo"]=="normal")
         require "vistas/vista_normal.php";
-    } else {
+    else
         require "vistas/vista_admin.php";
-    }
 
-    mysqli_close($conexion);
 }
 else
 {
-    require "vistas/vista_login.php"; 
+    require "vistas/vista_login.php";
 }
-
+?>
 
