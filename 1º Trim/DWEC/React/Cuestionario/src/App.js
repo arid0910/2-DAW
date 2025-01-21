@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react'
 import Cuestionario from './components/comp_cuestionario';
 import './App.css';
+import { Alert } from 'reactstrap';
 
 class App extends Component {
 
@@ -31,15 +32,19 @@ class App extends Component {
     let auxCont = this.state.contador
     let auxLista = this.state.preguntas
 
-    if(Btn === "si"){
+    if(Btn === "Si"){
       auxCont += 1
     }
 
-    auxLista.filter(l => l.id !== id)
+    let liLimpio = auxLista.filter(l => l.id !== id)
 
-    console.log(auxLista)
+    if(liLimpio.length === 0){
+      
+    }
+
+    console.log(auxLista.filter(l => l.id !== id))
     this.setState({
-      preguntas : auxLista,
+      preguntas : liLimpio,
       contador : auxCont
     })
   }
