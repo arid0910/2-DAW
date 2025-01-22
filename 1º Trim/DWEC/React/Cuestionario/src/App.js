@@ -23,36 +23,58 @@ class App extends Component {
         { id: "9", pregunta: "Sueles hacer alguna otra cosa mientras que miras al móvil como comer, lavarte los dientes, etc." },
         { id: "10", pregunta: "Vas al baño siempre con el móvil." },
       ],
-
-      contador : 0,
+      respuestas: [
+        "En principio no tienes nada de que preocuparte.",
+        "Empiezas a tener signos de dependencia del móvil. Puedes utilizar técnicas como apagar el móvil cuando no lo necesitas, cuando duermes, etc.",
+        "Tienes una gran dependencia del móvil. Deberías seguir un plan de «desintoxicación» del móvil como por ejemplo dejar el móvil en casa cuando vas a comprar, apagarlo durante la noche, apagarlo durante horas de clase o trabajo, etc.",
+        "Tus síntomas de dependencia son muy preocupantes. Además de todas las técnicas de los apartados anteriores deberías plantearte un plan de desintoxicación del móvil que consista en estar una o dos semanas sin utilizarlo. Si ves que no puedes hacerlo por ti mismo, pide ayuda a un profesional.",
+      ],
+      contador: 0,
+      mostrarAlerta: false
     }
   }
 
-  handlerOnClick(Btn, id){
+  handlerOnClick(Btn, id) {
     let auxCont = this.state.contador
     let auxLista = this.state.preguntas
 
-    if(Btn === "Si"){
+    if (Btn === "Si") {
       auxCont += 1
     }
 
     let liLimpio = auxLista.filter(l => l.id !== id)
 
-    if(liLimpio.length === 0){
-      
+    this.setState({
+      preguntas: liLimpio,
+      contador: auxCont,
+      mostrarAlerta: liLimpio.length === 0
+    })
+  }
+
+  alertas(){
+    let alerta = ""
+    let cont = this.state.contador
+
+    if (this.state.mostrarAlerta) {
+      if (cont >= 1 && cont <= 5) {
+        alerta = <Alert color='success'>{this.state.respuestas[0]}</Alert>;
+      } else if (cont >= 6 && cont <= 7) {
+        alerta = <Alert color='primary'>{this.state.respuestas[1]}</Alert>;
+      } else if (cont >= 8 && cont <= 9) {
+        alerta = <Alert color='warning'>{this.state.respuestas[2]}</Alert>;
+      } else {
+        alerta = <Alert color='danger'>{this.state.respuestas[3]}</Alert>;
+      }
     }
 
-    console.log(auxLista.filter(l => l.id !== id))
-    this.setState({
-      preguntas : liLimpio,
-      contador : auxCont
-    })
+    return alerta
   }
 
   render() {
     return (
       <div className="App">
-        <Cuestionario listaPre = {this.state.preguntas} click={(Btn, id)=>this.handlerOnClick(Btn, id)}/>
+        <Cuestionario listaPre={this.state.preguntas} click={(Btn, id) => this.handlerOnClick(Btn, id)} />
+        <>{this.alertas()}</>
       </div>
     );
   }
