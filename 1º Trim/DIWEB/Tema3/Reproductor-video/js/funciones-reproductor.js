@@ -5,7 +5,7 @@ var btnPlay = document.getElementById('btnPlay');
 var reproducir = document.getElementById('reproducir');
 var parar = document.getElementById('parar');
 var restart = document.getElementById('restart');
-var volume = document.getElementById('volumen');
+var volume = document.getElementById('volume');
 var mute = document.getElementById('mute');
 var btnMute = document.getElementById('btnMute');
 
@@ -15,7 +15,6 @@ var adelante = document.getElementById('adelante');
 var lento = document.getElementById('lento');
 var rapido = document.getElementById('rapido');
 
- 
 var fullscreen = document.getElementById('fullscreen');
 var isPaused = true;
 
