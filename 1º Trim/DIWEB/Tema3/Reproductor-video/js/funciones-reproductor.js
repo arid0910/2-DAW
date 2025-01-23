@@ -15,6 +15,7 @@ var adelante = document.getElementById('adelante');
 var lento = document.getElementById('lento');
 var rapido = document.getElementById('rapido');
 
+
 var fullscreen = document.getElementById('fullscreen');
 var isPaused = true;
 
@@ -105,11 +106,11 @@ mute.onclick = function (ev) {
 };
 
 atras.onclick = function (ev) {
-    video.currentTime -= 5;
+    video.currentTime -= 10;
 };
 
 adelante.onclick = function (ev) {
-    video.currentTime += 5;
+    video.currentTime += 10;
 };
 
 lento.onclick = function (ev) {

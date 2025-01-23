@@ -51,7 +51,7 @@ function validateToken()
         if ($sentencia->rowCount() > 0) {
             $respuesta["usuario"] = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-            $payload['exp'] = strtotime("now") + 3600;
+            $payload['exp'] = time() + 3600;
             $payload['data'] = $respuesta["usuario"]["id_usuario"];
             $jwt = JWT::encode($payload, PASSWORD_API, 'HS256');
             $respuesta["token"] = $jwt;
