@@ -96,12 +96,12 @@ volume.onchange = function (ev) {
 mute.onclick = function (ev) {
     if (video.muted) {
         video.muted = false;
-        btnMute.classList.remove("fa-volume-off");
+        btnMute.classList.remove("fa-volume-xmark");
         btnMute.classList.add("fa-deaf");
     } else {
         video.muted = true;
         btnMute.classList.remove("fa-deaf");
-        btnMute.classList.add("fa-volume-off");
+        btnMute.classList.add("fa-volume-xmark");
     }
 };
 
