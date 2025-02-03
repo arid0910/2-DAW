@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Candela</title>
+</head>
+
+<body>
+    <script>
+        let mapa = [['*', '', '', '', '', ''],
+                    ['*', '', '', '', '', ''],
+                    ['*', '*', '*','*', '', ''],
+                    ['*', '*', '', '*', '', ''],
+                    ['*', '*', '', '*', '*', '*']];
+
+        console.log(heaven(mapa, 0, 0));
+
+        function heaven(array, x, y) {
+            // Verificar límites para no salir del array
+            if (x < 0 || x >= array.length || y < 0 || y >= array[x].length) {
+                return "No soy libre";
+            }
+
+            // Si la posición no es accesible
+            if (array[x][y] === "") {
+                return "No soy libre";
+            }
+
+            // Si hemos llegado a la última posición libre
+            if (x === array.length - 1 && y === array[0].length - 1 && array[x][y] === "*") {
+                return "Soy libre";
+            }
+
+            // Marcar la posición actual como visitada
+            array[x][y] = "$";
+
+            // Buscar en las direcciones adyacentes
+            if (x - 1 >= 0 && array[x - 1][y] === "*") {
+                let result = heaven(array, x - 1, y); // Arriba
+                if(result === "Soy libre") return result;
+            }
+
+            if (x + 1 < array.length && array[x + 1][y] === "*") {
+                let result = heaven(array, x + 1, y); // Abajo
+                if(result === "Soy libre") return result;
+            }
+
+            if (y - 1 >= 0 && array[x][y - 1] === "*") {
+                let result = heaven(array, x, y - 1); // Izquierda
+                if(result === "Soy libre") return result;
+            }
+
+            if (y + 1 < array[x].length && array[x][y + 1] === "*") { 
+                let result = heaven(array, x, y + 1); // Derecha
+                if(result === "Soy libre") return result;
+            }
+
+            // Si no hay camino, regresar "No soy libre"
+            return "No soy libre";
+        }
+    </script>
+</body>
+
+</html>

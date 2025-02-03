@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 1.25rem;
+    position: relative;
+    background-color: #fff;
+    z-index: 10;
+}
+
+#menu-principal {
+    display: flex;
+    align-items: center;
+    order: -2;
+    position: relative;
+}
+
+#menu-principal input {
+    display: none;
+}
+
+#menu-principal label {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#menu {
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    background-color: rgb(245, 245, 245);
+    position: absolute;
+    top: 3.25rem;
+    left: 0;
+    width: 12.5rem;
+    padding: 0.625rem 0;
+    margin: 0;
+    z-index: 20;
+}
+
+#menu-hamburger:checked + #menu {
+    display: flex;
+}
+
+#menu li {
+    padding: 0.625rem 1.25rem;
+    margin: 0;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    display: block;
+}
+
+#menu li a:hover {
+    background-color: #f4f4f4;
+}
+
+#buscador ul,
+#compra ul {
+    list-style: none;
+}
+
+#buscador li,
+#compra li {
+    margin: 0 0.625rem;
+}
+
+#buscador a,
+#compra a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.125rem;
+}
+
+#logo {
+    height: 2.5rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1.25rem;
+    margin-top: 3.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+main article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .5rem;
+}
+
+main article a {
+    display: flex;
+    flex-direction: column; 
+    text-align: center; 
+    text-decoration: none;
+    color: black;
+}
+
+main article a picture {
+    order: 1; 
+}
+
+main article a h3 {
+    order: 2; 
+}
+
+main article p {
+    order: 3; 
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+}
+
+footer nav ul{
+    display: flex;
+    list-style: none;
+}
+
+footer nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+footer nav#menu-adicional ul{
+    flex-direction: column;
+}
+
+footer nav#menu-adicional ul li{
+    border-bottom: solid 1px black;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+}
+
+footer nav#iconos-sociales ul{
+    justify-content: center;
+}
+
+footer nav#iconos-sociales ul li{
+    transform: scale(2,2);
+    padding-right: 1.5rem;
+    align-self: center;
+}

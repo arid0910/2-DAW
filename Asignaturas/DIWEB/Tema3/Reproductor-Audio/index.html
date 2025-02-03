@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor musica</title>
+    <script src="https://kit.fontawesome.com/5a86f3889e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/funciones-reproductor-audio.js" defer></script>
+</head>
+
+<body>
+    <audio id="audio">
+        <source  src="audio/hotel-california.mp3" type="audio/mp3">
+        <source  src="audio/hotel-california.ogg" type="audio/ogg">
+    </audio>
+
+    <div id="contReproductor">
+        <button aria-label="reproducir" id="reproducir"><i id="btnPlay" class="fa-solid fa-play"></i></button>
+        <button aria-label="parar" id="parar"><i class="fa-solid fa-stop"></i></button>
+        <button aria-label="restart" id="restart"><i class="fa-solid fa-redo"></i></button>
+        <button aria-label="volume-down" id="volume-down"><i class="fa-solid fa-volume-low"></i></button>
+        <button aria-label="volume-up" id="volume-up"><i class="fa-solid fa-volume-high"></i></button>
+    </div>
+
+</body>
+
+</html>

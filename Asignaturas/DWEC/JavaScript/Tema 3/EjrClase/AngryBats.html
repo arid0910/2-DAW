@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angry Bats</title>
+</head>
+<body>
+    <script>
+        let AngryBats =  [['P', 'P', 'G', 'H', 'H', 'R'], 
+                          ['P', 'P', 'G', 'H', 'H', 'G'], 
+                          ['P', 'G', 'M', 'H', 'H', 'G'], 
+                          ['G', 'R', 'M', 'H', 'G', 'G'], 
+                          ['R', 'R', 'H', 'H', 'G', 'P']];
+    
+        
+        infectar(AngryBats, 2, 2); 
+        console.log(AngryBats);
+    
+        function infectar(array,x, y) {
+            
+            //que no se salga
+            if(x < 0 || x >= array.length || y < 0 || y >= array[x].length){
+                return;
+            }
+    
+            //si esta vacio o no es un murcielago
+            if(array[x][y] !== "H" && array[x][y] !== "M"){
+                return;
+            }
+        
+            //Si es M 
+            if(array[x][y] === "M"){
+                array[x][y] = "m";  
+            } 
+    
+            //Si es H 
+            if(array[x][y] === "H"){
+                array[x][y] = "";  
+            }
+    
+            //Buscar adyacentes 
+            if (x - 1 >= 0 && (array[x - 1][y] === "M" || array[x - 1][y] === "H")){
+                infectar(array, x - 1, y); // Arriba
+            } 
+            if (x + 1 < array.length && (array[x + 1][y] === "M" || array[x + 1][y] === "H")){
+                infectar(array, x + 1, y); // Abajo
+            } 
+            if (y - 1 >= 0 && (array[x][y -1] === "M" || array[x][y -1] === "H")){
+                infectar(array, x, y - 1); // Izquierda
+            } 
+            if (y + 1 < array[y].length && (array[x][y + 1] === "M" || array[x][y + 1] === "H")){
+                infectar(array, x, y + 1); // Derecha
+            } 
+        }
+    </script>
+    
+</body>
+</html>

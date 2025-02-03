@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto O Map</title>
+</head>
+
+<body>
+
+    <p id="resultado"></p>
+    <input type="text" id="ciudad" value="ESTE" placeholder="Nombre ciudad">
+    <button onclick="dale()">ejecuta</button>
+
+    <script>
+        let numeros = [{ cp: 28924, ciudad: 'ESTEPONA' }, { cp: 29601, ciudad: 'MARBELLA' }];
+
+        function dale() {
+            document.getElementById("resultado").innerHTML = "";
+
+            numeros.map((dato) => {
+                let city = document.getElementById("ciudad").value;
+                if (dato.ciudad.includes(city.toUpperCase()))
+                    document.getElementById("resultado").innerHTML = dato.ciudad + "-" + dato.cp;
+            });
+        }
+    </script>
+
+</body>
+ 
+</html>

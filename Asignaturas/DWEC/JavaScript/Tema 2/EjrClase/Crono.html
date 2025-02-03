@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+</head>
+<body>
+    <p id="tiempo">00:00</p>
+
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="rest">Reset</button>
+
+    <script>
+        var minutos = 0;
+        var segundos = 0;
+
+        function contador(){
+            if(segundos < 60){
+                segundos++;
+            } else {
+                segundos = 0;
+                minutos++;
+            }
+
+            if(segundos < 10){segundos = "0" + segundos}
+            document.getElementById("tiempo").innerHTML = minutos + ":" + segundos;
+        }
+        
+        function start(){
+            setInterval(contador, 1000);
+        }
+
+        function stop() {
+            clearInterval();
+        }
+
+        function rest(){
+
+        }
+
+        document.getElementById("start").addEventListener('click', start, false)
+        document.getElementById("stop").addEventListener('click', stop, false)
+        document.getElementById("rest").addEventListener('click', rest, false)
+    </script>
+</body>
+</html>

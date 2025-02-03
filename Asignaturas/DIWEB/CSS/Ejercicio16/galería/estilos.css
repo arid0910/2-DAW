@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-image: url(Texture-background/99.jpg);
+}
+
+img{
+    width: 18rem;
+    height: auto;
+    margin:1rem;
+}
+
+div.row > div.columns{
+    padding: 1rem 0;
+}
+
+div.row > div.columns > ul.polaroids{
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    justify-content: center;
+    gap:3rem;
+    padding-left: 0;
+}
+
+div.row > div.columns > ul.polaroids > li{
+    flex:0 0 20rem;
+    background-color: white;
+    transition-duration: .5s;
+}
+
+div.row > div.columns > ul.polaroids > li > a{
+    display: flex;
+    flex-flow: column;
+    text-decoration: none;
+    color: black;
+    align-items: center;
+}
+
+div.row > div.columns > ul.polaroids > li:nth-child(2n+1){
+    transform: rotate(2.5deg);
+}
+
+div.row > div.columns > ul.polaroids > li:nth-child(3n+1){
+    transform: rotate(-2.5deg);
+}
+
+div.row > div.columns > ul.polaroids > li:nth-child(5n+0){
+    transform: rotate(5deg);
+}
+
+div.row > div.columns > ul.polaroids > li > a[title]::after{
+    content: attr(title);
+    padding:1.5rem 0;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+div.row > div.columns > ul.polaroids>li:hover{
+    transform: scale(1.1);
+    transition-duration: .5s;
+}
+

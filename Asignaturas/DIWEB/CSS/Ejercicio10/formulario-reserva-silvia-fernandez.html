@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Cita - Silvia Fernández</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <main>
+        <h2>Reserva de Cita</h2>
+        <form action="#" method="POST">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required autofocus maxlength="25"
+                pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$" title="Inserte su nombre">
+
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" required maxlength="50"
+                pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$" title="Inserte su apellido">
+
+            <label for="telefono">Teléfono</label>
+            <div>
+                <select id="pais" name="pais">
+                    <option value="" disabled selected>Seleccione el idioma</option>
+                    <option value="+34">🇪🇸</option>
+                    <option value="+1">🇺🇸</option>
+                    <option value="+44">🇬🇧</option>
+                    <option value="+33">🇫🇷</option>
+                </select>
+                <input type="tel" id="telefono" name="telefono" placeholder="612 34 56 78" pattern="[0-9]{9}" required
+                    maxlength="25" title="Inserte su número de teléfono">
+            </div>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required maxlength="25"
+                title="Inserte su dirección de correo electrónico"
+                pattern="[a-zA-Z0-9. %+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+
+            <label for="punto_venta">Selecciona tu punto de venta</label>
+            <select id="punto_venta" name="punto_venta" required>
+                <option value="" disabled selected>Seleccione el puntode venta</option>
+                <option value="madrid">Madrid</option>
+                <option value="zaragoza">Zaragoza</option>
+                <option value="sevilla">Sevilla</option>
+                <option value="malaga">Málaga</option>
+                <option value="bilbao">Bilbao</option>
+                <option value="cordoba">Córdoba</option>
+                <option value="santander">Santander</option>
+            </select>
+
+            <label for="tipo_vestido">Tipo de Vestido</label>
+            <select id="tipo_vestido" name="tipo_vestido" required>
+                <option value="" disabled selected>Seleccione el tipo de vestido</option>
+                <option value="vestido_novia">Vestido de Novia</option>
+                <option value="vestido_fiesta">Vestido de Fiesta</option>
+            </select>
+
+            <label for="fecha_cita">Fecha de cita</label>
+            <input type="date" id="fecha_cita" name="fecha_cita" required title="Inserta una fecha válida">
+
+            <input type="submit" value="Reservar">
+        </form>
+    </main>
+</body>
+
+</html>

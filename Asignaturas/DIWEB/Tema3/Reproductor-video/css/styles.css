@@ -1,0 +1,18 @@
+main{
+    max-width: 27.3%
+}
+
+#botones{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: -.5rem;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+}
+
+
+

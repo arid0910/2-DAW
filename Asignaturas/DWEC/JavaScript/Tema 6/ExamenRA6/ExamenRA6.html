@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen RA6 Adam Ridings</title>
+</head>
+
+<body>
+    <ol id="lista">
+        <li>Perico</li>
+        <li>Juanico
+            <ul>
+                <li>Jose
+                    <ul>
+                        <li>Roman</li>
+                        <li>Marco</li>
+                        <li>Rodrigo</li>
+                    </ul>
+                </li>
+                <li>Jose</li>
+                <li>Lorenzo
+                    <ul>
+                        <li>Dimas</li>
+                        <li>Gestas</li>
+                        <li>Malakatos</li>
+                        <li>Jose</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Sofoclis</li>
+    </ol>
+    
+
+    <script>
+
+        //Creo la funcion
+        function changeman(obj, man1, man2){
+            //for para recorrer la lista
+            for (let i = 0; i < obj.children.length; i++) {
+                //Mira cada elemento de la lista y cambia los nombres
+                obj.innerHTML = obj.innerHTML.replace(man1, man2)
+            }
+        }
+
+        changeman(document.getElementById("lista"), "Jose", "Pepe")
+    </script>
+</body>
+
+</html>

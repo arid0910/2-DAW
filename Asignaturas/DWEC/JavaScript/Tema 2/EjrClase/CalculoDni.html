@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo letra DNI</title>
+</head>
+
+<body>
+    <input type="text" name="dni" id="dni" onblur="calculo()" maxlength="9">
+    <label for="dni" id="lbldni"></label>
+
+    <script>
+        function calculo() {
+            var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+
+            let dni = document.getElementById("dni").value;
+            let dniNum = parseInt(dni.substring(0, dni.length - 1)); 
+            let ultimaLetra = dni[dni.length - 1].toUpperCase(); 
+
+            if (isNaN(dniNum) || dni.length != 9) {
+                document.getElementById("lbldni").innerHTML = "DNI inválido";
+                return;
+            }
+
+            let calcular = dniNum % 23;
+            let letraDniCorrecto = letras[calcular];
+
+            if (ultimaLetra === letraDniCorrecto) {
+                document.getElementById("lbldni").innerHTML = "DNI correcto";
+            } else {
+                document.getElementById("lbldni").innerHTML = "DNI incorrecto";
+            }
+        }
+    </script>
+</body>
+
+</html>

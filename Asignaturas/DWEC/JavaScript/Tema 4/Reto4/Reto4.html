@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 4</title>
+</head>
+
+<body>
+    <script>
+        var valumnos = {
+            "alumnos": [{
+                "nombre": "Fulanito",
+                "notas": {
+                    "DWEC": 8,
+                    "DWESE": 0.71,
+                    "ED": 7.04,
+                    "SSOO": 3.37,
+                    "BBDD": 0.22,
+                    "PROG": 1.09,
+                    "EINEM": 6.17
+                }
+            },
+            {
+                "nombre": "Menganito",
+                "notas": {
+                    "DWEC": 7,
+                    "DWESE": 0.71,
+                    "ED": 7.04,
+                    "SSOO": 3.37,
+                    "BBDD": 0.22,
+                    "PROG": 1.09,
+                    "EINEM": 6.17
+                }
+            }
+                ,
+            {
+                "nombre": "Cetanito",
+                "notas": {
+                    "DWEC": 6,
+                    "DWESE": 0.71,
+                    "ED": 7.04,
+                    "SSOO": 3.37,
+                    "BBDD": 0.22,
+                    "PROG": 1.09,
+                    "EINEM": 6.17
+                }
+            }
+            ]
+        };
+
+        //Suma de notas de dwec
+        const notasAlumnos = valumnos.alumnos.map(valor => Object.values(valor.notas));
+        const todasLasNotas = notasAlumnos.flat();
+        const sumaNota = todasLasNotas.reduce((accumulador, valorActual) => accumulador + valorActual, 0);
+        const media = sumaNota / todasLasNotas.length
+
+        console.log("La suma de la nota es: " + sumaNota.toFixed(2) + " La media de la nota es: " + media.toFixed(2));
+        
+    </script>
+</body>
+</html>

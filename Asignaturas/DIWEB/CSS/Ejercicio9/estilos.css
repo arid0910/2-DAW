@@ -1,0 +1,105 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+img{
+    width: 3rem;
+}
+
+#menu{
+    display: flex;
+    flex-flow: column;
+}
+
+#menu > .cerrar{
+    text-align: right;
+    padding-top: 1rem;
+    padding-right: 1rem;
+}
+
+#menu > h2{
+    font-size: 2.2rem;
+    margin-top: 0;
+    margin-bottom: .5rem;
+    padding-left: 3rem;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+li{
+    font-size: 1.3rem;
+    padding: 1rem 0;
+}
+
+#menu #main-menu, #menu #social-menu {
+    padding-left: 3rem;
+}
+
+#menu > #main-menu > ul ul{
+    padding-left: 1rem;
+    display: none;
+}
+
+#menu > #main-menu > ul ul li:nth-child(2){
+    padding-bottom: 0;
+}
+
+.desplegar{
+    width: 1.5rem;
+    vertical-align: middle;
+}
+
+#menu #main-menu ul li:hover ul{
+    display: block;
+}
+
+#menu #social-menu ul li span{
+    display: none;
+}
+
+#menu #social-menu ul{
+    display: flex;
+}
+
+#menu #social-menu ul li{
+    padding-right: 3.5rem;
+}
+
+#menu #idioma-menu{
+    padding-left: 2.5rem;
+}
+
+#menu #idioma-menu span{
+    font-size: 1.3rem;
+
+}
+
+#menu #idioma-menu ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#menu #idioma-menu ul li a img{
+    vertical-align: middle;
+    padding-right: .3rem;
+}
+
+#menu #idioma-menu ul{
+    display: none;
+}
+
+#menu #idioma-menu span:hover ~ ul{
+    display: flex;
+}

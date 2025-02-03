@@ -1,0 +1,8 @@
+*{box-sizing: border-box;}
+section{display: flex; flex-flow: column;}
+section h2{flex: auto;}
+section div#news{display: flex;}
+img{border-radius: 0.5rem; margin:1rem;}
+article.noticia{display:flex; flex-flow: column;}
+article.noticia>h3{background-color:#424242; color:white; border-radius:0.5rem; padding:1rem 0.6rem; margin:1rem;}
+h3#titular1,h3#titular2,h3#titular3{display: none;}
