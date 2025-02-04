@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>TAREA PRÁCTICA SOBRE EVENTOS DE RATÓN</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<script src="jq/jquery-3.7.1.min.js"></script>
+		<script>
+			$(function () {
+				$(document).on("keypress", function(event){
+					event.preventDefault();
+					if(String.fromCharCode(event.which) === "d"){
+						$("article.noticia > h3").toggle()
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<header>
+			<h1>PRÁCTICANDO CON LOS EVENTOS DE RATÓN</h1>
+		</header>
+		<section>
+			<h2>ÚLTIMAS NOTICIAS</h2>
+			<div id="news">
+				<article class="noticia">
+					<img id="noticia1" src="img/noticia1.jpg" width="200" height="200" alt="Imagen de la noticia 1">
+					<h3 id="titular1">Titular de la noticia 1</h3>
+					<p></p>
+				</article>
+				<article class="noticia">
+					<img id="noticia2" src="img/noticia2.jpg" width="200" height="200" alt="Imagen de la noticia 2">
+					<h3 id="titular2">Titular de la noticia 2</h3>
+				</article>
+				<article class="noticia">
+					<img id="noticia3" src="img/noticia3.jpg" width="200" height="200" alt="Imagen de la noticia 3">
+					<h3 id="titular3">Titular de la noticia 3</h3>
+				</article>
+			</div>
+		</section>
+	</body>
+</html>
