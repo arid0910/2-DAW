@@ -101,13 +101,23 @@
     <form action="" method="post" enctype="multipart/form-data"></form>
     <script>
         $(function () {
-            $("#email, #met-contacto").on("focus", function(){
-                $(this).css("background", "lightpink")
-            })
+           $("#email").on("select", function(){
+            let option = $(this).next();
+            option.toggle("fadein")
 
-            $("#email, #met-contacto").on("focusout", function(){
-                $(this).css("background", "white")
-            })
+            setTimeout(function(){ 
+                option.toggle("fadeout")
+            }, 1500)
+           })
+
+           $("#met-contacto").on("change", function(){
+            let valor = $(this).val()
+            if(valor === ""){
+                $("#info-contacto").css("display", "none")
+            } else {
+                $("#info-contacto").text("Vamos a contactar con usted por " + valor).css("display", "block")
+            }
+           })
         });
     </script>
 

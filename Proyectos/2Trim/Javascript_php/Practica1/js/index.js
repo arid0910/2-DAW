@@ -18,29 +18,24 @@ function obtener_productos()
             $("#respuesta").html(data.error);
         }else{
             let html_tabla_productos="<table>";
-            html_tabla_productos+="<tr><th>COD</th><th>Nombre Corto</th><th>PVP (€)</th></tr>";
+            html_tabla_productos+="<tr><th>COD</th><th>Nombre Corto</th><th>PVP (€)</th><th><button class='enlace' onclick=''>Producto+</button></th></tr>";
             $.each(data.productos,function(key,tupla){
                 html_tabla_productos+="<tr>";
                 html_tabla_productos += "<td><button class='enlace' onclick='obtener_producto(\"" + tupla["cod"] + "\")'>" + tupla["cod"] + "</button></td>";
                 html_tabla_productos+="<td>"+tupla["nombre_corto"]+"</td>";
                 html_tabla_productos+="<td>"+tupla["PVP"]+"</td>";
+                html_tabla_productos+="<td><button class='enlace' onclick=''>Editar</button> - <button class='enlace' onclick=''>Borrar</button></td>";
                 html_tabla_productos+="</tr>";
             });
             html_tabla_productos+="</table>";
             $("#respuesta").html(html_tabla_productos);
-
+            
         }
     })
     .fail(function(a,b){
         $("#respuesta").html(error_ajax_jquery(a,b)); 
     });
 }
-
-function volver(){
-    $("#info").html(""); 
-}
-
-
 function obtener_producto(producto)
 {
     $.ajax({
@@ -53,24 +48,29 @@ function obtener_producto(producto)
         {
             $("#info").html(data.error);
         }else{
-            let html_tabla_productos="<div>";
-            html_tabla_productos += "<h2>Detalles del producto"+data.producto["cod"]+"</h2>";
-            if(data.producto["cod"] == "null"){
-                html_tabla_productos += "<h2>Detalles del producto"+if(data)+"</h2>";
+            let html_detalles_producto="<div>";
+            html_detalles_producto += "<h2>Detalles del producto"+data.producto["cod"]+"</h2>";
+            if(data.producto["nombre"] == null){
+                html_detalles_producto += "<p><strong>Nombre: </strong></p>";
+            } else {
+                html_detalles_producto += "<p><strong>Nombre: </strong>"+data.producto["nombre"]+"</p>";
             }
-            html_tabla_productos += "<p><strong>Nombre: </strong>"+data.producto["nombre"]+"</p>";
-            html_tabla_productos += "<p><strong>Nombre Corto: </strong>"+data.producto["nombre_corto"]+"</p>";
-            html_tabla_productos += "<p><strong>Descripción: </strong>"+data.producto["descripcion"]+"</p>";
-            html_tabla_productos += "<p><strong>PVP: </strong>"+data.producto["PVP"]+"</p>";
-            html_tabla_productos += "<p><strong>Familia: </strong>"+data.producto["familia"]+"</p>";
-            html_tabla_productos += "<p><button onclick='volver()'>Volver</button></p>";
+            html_detalles_producto += "<p><strong>Nombre Corto: </strong>"+data.producto["nombre_corto"]+"</p>";
+            html_detalles_producto += "<p><strong>Descripción: </strong>"+data.producto["descripcion"]+"</p>";
+            html_detalles_producto += "<p><strong>PVP: </strong>"+data.producto["PVP"]+"</p>";
+            html_detalles_producto += "<p><strong>Familia: </strong>"+data.producto["familia"]+"</p>";
+            html_detalles_producto += "<p><button onclick='volver()'>Volver</button></p>";
 
-            $("#info").html(html_tabla_productos);
+            $("#info").html(html_detalles_producto);
         }
     })
     .fail(function(a,b){
         $("#info").html(error_ajax_jquery(a,b)); 
     });
+}
+
+function volver(){
+    $("#info").html(""); 
 }
 
 function error_ajax_jquery( jqXHR, textStatus) 
