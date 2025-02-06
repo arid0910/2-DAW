@@ -61,7 +61,8 @@ function login(){
 function montarVista(usuario, tipo) {
     let mensaje_login
     mensaje_login = "<h3>Bienvenido " + usuario + "</h3>"
-    mensaje_login += "<p>Eres de tipo " + tipo + " pulsa para salir <button onclick='event.preventDefault(); desLoguearse()' class='boton'>Salir</button></p>"
+    mensaje_login += "<p>Tipo: " + tipo + "</p>"
+    mensaje_login += "<button onclick='volver()'>Volver</button>"
     $("#respuesta").html(mensaje_login)
 }
 
@@ -75,6 +76,11 @@ function time_out() {
     }
     localStorage.setItem("ultima_accion", Date.now())
     return true
+}
+
+function volver(){
+    localStorage.clear();
+    mostarLogin();
 }
 
 function error_ajax_jquery( jqXHR, textStatus) 
