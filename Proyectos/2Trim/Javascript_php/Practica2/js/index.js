@@ -4,7 +4,7 @@ $(function(){
     if (time_out()) {
         montarVista(localStorage.getItem("usuario"), localStorage.getItem("tipo"))
     } else {
-        montarLoguin()
+        mostarLogin()
     }
 })
 
