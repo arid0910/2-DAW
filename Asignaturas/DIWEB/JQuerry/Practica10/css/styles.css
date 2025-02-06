@@ -1,0 +1,173 @@
+*{box-sizing: border-box;}
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+}
+
+header, footer{
+  background-color: #e6e7e8;
+  border: 2px solid #3f3f3f;
+  border-radius: 5px; 
+}
+
+footer{
+  color: #3f3f3f;
+  height: 2rem;
+}
+
+header img#logo{
+  width: 5rem;
+  height: 4.35rem;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Bree Serif', serif;
+  color: #00acdd;
+}
+
+header h1{
+  color: #004166;
+  font-weight: bold;
+}
+
+header h1 span#subject{
+  color: #96bc33;
+}
+
+a{
+  text-decoration: none;
+  cursor:pointer;
+}
+
+a:link{
+  color: #00acdd;
+}
+
+a:visited{
+  color: #ea2126;
+}
+
+a:hover{
+  cursor: pointer;
+  color: #f58a1e;
+}
+
+nav ul li{
+  list-style-type: none;
+}
+nav ul{
+	padding-left: 0;
+}
+
+nav#main-menu{
+  background-color: #004166;
+  font-weight: bold;
+  border: 2px solid #e6e7e8;
+  border-radius: 5px;
+}
+
+main section#principal{
+  border: 2px solid #004166;
+  border-radius: 5px;
+}
+
+main section article.news-art{
+  border: 5px solid #e6e7e8;
+  border-radius: 0.8rem;
+}
+
+div#content, section#principal, article.news-art{
+  display: flex;
+  flex-flow: column;
+}
+
+div#content > header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+div#content main section#principal article#primerElemento{
+  background-color: #e6e7e8;
+  border-color: #f58a1e;
+}
+
+div#content main section article.news-art img{
+  width: 20rem;
+  height: auto;
+}
+
+div#content main section article.news-art p{
+  padding: 0 1rem;
+}
+
+div#content > nav#main-menu > input, div#content > nav#main-menu > ul{
+  display: none;
+}
+
+div#content > nav#main-menu > input:checked + ul{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+div#content > nav#main-menu > ul > li{
+  padding: .3rem 0;
+}
+
+div#content > nav#main-menu > label > span{
+  font-weight: bold;
+  font-size: 2.3rem;
+  color: white;
+}
+
+div#content > nav#main-menu{
+  text-align: center;
+}
+
+section#principal, article.news-art{
+  align-items: center;
+}
+
+@media(min-width:768px){
+  article.news-art{
+    flex-flow: row wrap;
+  }
+
+  article.news-art h3{
+    flex: 100%;
+  }
+
+  article.news-art p{
+    flex: 55%;
+  }
+}
+
+@media (min-width:1024px){
+  div#content > nav#main-menu > ul {
+    display: flex;
+    flex-flow: row ;
+    justify-content: space-evenly;
+  }
+
+  div#content>nav#main-menu>label>span {
+    display: none;
+  }
+  section#principal {
+    flex-flow: row wrap;
+  }
+
+  section#principal h2, section#principal article#primerElemento {
+    flex: 100%;
+  }
+
+  section#principal article.news-art {
+    flex: 50%;
+  }
+}
+
+
+

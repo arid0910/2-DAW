@@ -177,8 +177,8 @@ class App extends Component {
     };
   }
 
-  toggleModal1() {
-    this.setState({ isOpen: !this.state.isOpen1 })
+  toggleModal() {
+    this.setState({isOpen: !this.state.isOpen})
   }
 
   toggleModal2() {
@@ -246,12 +246,12 @@ class App extends Component {
   render() {
     return (
       <>
-        <Button color='primary' onClick={() => this.toggleModal1()}>Carrito({this.totalEnCarrito()})</Button>
+        <Button color='primary' onClick={() => this.toggleModal()}>Carrito({this.totalEnCarrito()})</Button>
         <Button color='primary' onClick={() => this.toggleModal2()}>Pedidos</Button>
         <ShowProductos liPro={this.state.listaProductos} comprar={(nombre, id) => this.Comprar(nombre, id)} />
         <VentanaModal
-          mostrar={this.state.isOpen1}
-          toggle={() => this.toggleModal1()}
+          mostrar={this.state.isOpen}
+          toggle={() => this.toggleModal()}
           carro={this.state.carrito}
           resta={(id) => this.resta(id)}
           suma={(id) => this.suma(id)}
