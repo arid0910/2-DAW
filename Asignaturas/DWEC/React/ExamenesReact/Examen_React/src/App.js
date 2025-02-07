@@ -1,4 +1,4 @@
-import { Component, useState } from 'react'
+import { Component, useState, useEffect } from 'react'
 import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Col, Label, FormGroup, Alert } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -42,7 +42,12 @@ function Producto(props) {
 function ShowProductos(props) {
   let Productos = []
   for (let i = 0; i < props.liPro.length; i++) {
-    Productos.push(<Producto img={props.liPro[i].imagen} nombre={props.liPro[i].nombre} texto={props.liPro[i].texto} comprar={(nombre, id) => props.comprar(nombre, id)} id={props.liPro[i].id} />)
+    Productos.push(<Producto 
+      img={props.liPro[i].imagen} 
+      nombre={props.liPro[i].nombre} 
+      texto={props.liPro[i].texto} 
+      comprar={(nombre, id) => props.comprar(nombre, id)} 
+      id={props.liPro[i].id} />)
   }
   return (
     <>
@@ -62,6 +67,7 @@ const VentanaModal = (props) => {
 
   const [verAlerta, setVerAlerta] = useState(false)
   const [msgAlerta, setmsgAlerta] = useState()
+  const [colorAlerta, setcolorAlerta] = useState()
 
   const handleChange = (event) => {
     let target = event.target;
@@ -83,15 +89,25 @@ const VentanaModal = (props) => {
     }
   }
 
-  const pedir = (array, total) => {
-    if (nombre === "" || apellido === "" || telefono === "" || direccion === "") {
+  useEffect(() => {
+    if (!props.mostrar) {
+      setVerAlerta(false); 
+      setmsgAlerta("");
+    }
+  }, [props.mostrar]);
+
+  const pedir = (array, totalPro, totalPre) => {
+    if (nombre === undefined || apellido === undefined || telefono === undefined || direccion === undefined) {
       setVerAlerta(true)
-      setmsgAlerta('Campos vacios!!')
-    } else if (isNaN(telefono)) {
-      setVerAlerta(true)
-      setmsgAlerta('Solo se puede introducir números en "Teléfono"')
+      setcolorAlerta("danger")
+      setmsgAlerta('Campos vacios o erroneos')
     } else {
-      array.push("Pedido nº: 1" + "Pedido de: " + nombre + apellido + "Productos pedidos: " + total)
+      let idPedido = array.length ? array[array.length - 1].id + 1 : 1;
+      let infoPedido = <p>{"Pedido nº:"+idPedido+"  Pedido por: "+nombre+" "+apellido+ "  Productos: "+totalPro+"  Pecio: "+totalPre+ "€"}</p>
+      array.push({id: idPedido , info: infoPedido})
+      setVerAlerta(true)
+      setcolorAlerta("primary")
+      setmsgAlerta('Pedido hecho con exito')
     }
   }
 
@@ -101,8 +117,12 @@ const VentanaModal = (props) => {
         <ModalHeader toggle={props.toggle}>CARRITO DE LA COMPRA</ModalHeader>
         <ModalBody>
           {props.carro.map(p => {
-            return (<p>{p.nombre + " - " + p.numero} {"  "} {<Button onClick={() => props.resta(p.id)}>-</Button>}{<Button onClick={() => props.suma(p.id)}>+</Button>}</p>)
+            return (<p>{p.nombre + " - " + p.numero + " - " + p.precio + "€" } 
+            {"  "} 
+            {<Button onClick={() => props.resta(p.id, p.precio)}>-</Button>}
+            {<Button onClick={() => props.suma(p.id, p.precio)}>+</Button>}</p>)
           })}
+          {"Total: " + props.totalPrecio()+ "€"}
           <FormGroup row>
             <Label sm={2} > Nombre: </Label>
             <Col sm={10}>
@@ -139,10 +159,10 @@ const VentanaModal = (props) => {
                 type="text" />
             </Col>
           </FormGroup>
-          <Alert isOpen={verAlerta} color='danger'>{msgAlerta}</Alert>
+          <Alert isOpen={verAlerta} color={colorAlerta}>{msgAlerta}</Alert>
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={() => pedir(props.pedidos, props.totalProductos)}>PEDIR</Button>
+          <Button color='primary' onClick={() => pedir(props.pedidos, props.totalProductos(), props.totalPrecio())}>PEDIR</Button>
           <Button color='primary' onClick={() => props.toggle()}>CERRAR</Button>
         </ModalFooter>
       </Modal>
@@ -155,9 +175,9 @@ const VentanaModalPedidos = (props) => {
 
   return (
     <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
-      <ModalHeader toggle={props.toggle}>CARRITO DE LA COMPRA</ModalHeader>
+      <ModalHeader toggle={props.toggle}>HISTORIAL DE PEDIDOS</ModalHeader>
       <ModalBody>
-
+        {props.pedidos.map(p => p.info)}
       </ModalBody>
       <ModalFooter>
         <Button color='primary' onClick={() => props.toggle()}>CERRAR</Button>
@@ -182,20 +202,24 @@ class App extends Component {
   }
 
   toggleModal2() {
-    this.setState({ isOpen: !this.state.isOpen2 })
+    this.setState({ isOpen2: !this.state.isOpen2 })
   }
 
   Comprar(nombre, id) {
     let auxCarrito = this.state.carrito;
+    let precio = this.state.listaProductos.find(p => p.id === id).precio
 
     let existe = auxCarrito.filter(p => p.id === id).length
     if (existe === 0) {
-      let producto = { id: id, nombre: nombre, numero: 1 }
+      let producto = { id: id, nombre: nombre, numero: 1, precio: precio}
       auxCarrito.push(producto)
     } else {
       auxCarrito.map(p => {
         if (p.id === id) {
           p.numero += 1
+          p.precio += precio
+          console.log(precio)
+          console.log(p.precio)
         }
       })
     }
@@ -205,10 +229,12 @@ class App extends Component {
 
   suma(id) {
     let auxCarrito = this.state.carrito;
+    let precio = this.state.listaProductos.find(p => p.id === id).precio
 
     auxCarrito.map(p => {
       if (p.id === id) {
         p.numero += 1
+        p.precio += precio
       }
     })
 
@@ -217,11 +243,13 @@ class App extends Component {
 
   resta(id) {
     let auxCarrito = this.state.carrito;
+    let precio = this.state.listaProductos.find(p => p.id === id).precio
 
     auxCarrito = auxCarrito.map(p => {
       if (p.id === id) {
         if (p.numero > 0) {
           p.numero -= 1;
+          p.precio -= precio
         }
         if (p.numero === 0) {
           return null;
@@ -243,6 +271,16 @@ class App extends Component {
     return (total)
   }
 
+  totalPrecio(){
+    let total = 0;
+
+    this.state.carrito.map(p => {
+      total += p.precio
+   })
+
+   return(total)
+  }
+
   render() {
     return (
       <>
@@ -257,6 +295,7 @@ class App extends Component {
           suma={(id) => this.suma(id)}
           pedidos={this.state.pedidos}
           totalProductos={() => this.totalEnCarrito()}
+          totalPrecio={() => this.totalPrecio()}
         />
 
         <VentanaModalPedidos
