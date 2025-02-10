@@ -1,4 +1,4 @@
-const DIR_API="http://localhost/Proyectos/Curso24_25/Servicios_Web/Actividad5/servicios_rest_protect";
+const DIR_API="http://localhost/2DAW/Proyectos/2Trim/Servicios_Web/Actividad5/servicios_rest_protect";
 const MINUTOS=1;
 
 $(function(){
@@ -103,7 +103,6 @@ function hacer_login()
         type:"POST",
         dataType:"json",
         data:{"usuario":usuario,"clave":clave_cifrada}
-    
     })
     .done(function(data){
         if(data.error)
