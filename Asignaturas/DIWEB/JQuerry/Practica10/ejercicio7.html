@@ -96,14 +96,15 @@
 </script>
 <script>
 	$(function(){
-		$("span#svg-menu").on("mouseenter", function(e){
-			$(this).animate({"color" : "orange"}, 500)
-		})
+    $("span#svg-menu").on("mouseenter", function(e){
+        $(this).stop(true).animate({"color" : "orange"}, 200);
+    });
 
-		$("span#svg-menu").on("mouseleave", function(e){
-			$(this).animate({"color" : "white"}, 500)
-		})
-	})
+    $("span#svg-menu").on("mouseleave", function(e){
+        $(this).stop(true).animate({"color" : "white"}, 200);
+    });
+});
+
 </script>
 
 <body>
