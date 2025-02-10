@@ -5,101 +5,85 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    }
+    background-color: #00030F;
+}
 
-.header-container {
+/* HEADER */
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    background-color: #BEE9F4;
+    padding: 1rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-nav {
+    display: none;
+}
+
+#menu,
+#user,
+#lupa {
+    width: 1.5rem;
+    height: 0 auto;
+}
+
+.cuadro-busqueda {
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    border-radius: 1rem;
+    width: 15rem;
+    height: 2rem;
+    padding: .5rem;
+}
+
+#lupa {
+    width: 1.1rem;
+    height: 0 auto;
+    margin-right: .2rem;
+}
+
+#logo {
+    width: 2.5rem;
+    height: 0 auto;
+}
+
+.iconos-derecha {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 1rem;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #BEE9F4;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: rgba(0, 0, 0, 0.9);
 }
 
-.logo img {
-    height: 50px;
-    width: auto;
-}
-
-.main-nav ul {
+#politicas {
     display: flex;
-    list-style: none;
-    gap: 2rem;
+    flex-direction: column;
 }
 
-.main-nav a {
-    color: #ffffff;
+#politicas a {
+    color: black;
     text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
 }
 
-.main-nav a:hover,
-.main-nav a.active {
-    color: #F57B01;
-}
-
-.user-actions {
+#iconos-redes {
     display: flex;
     gap: 1rem;
 }
 
-.search-btn,
-.menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.search-btn img,
-.menu-btn img {
-    width: 24px;
-    height: 24px;
-    filter: invert(1);
-    transition: transform 0.3s ease;
-}
-
-.search-btn:hover img,
-.menu-btn:hover img {
-    transform: scale(1.1);
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-
-social-links img {
-    width: 24px;
-    height: 24px;
-    filter: invert(1);
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover img {
-    transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-    .main-nav {
-        display: none;
-    }
-    
-    .header-container {
-        padding: 1rem;
-    }
-    
-    .logo img {
-        height: 40px;
-    }
+#iconos-redes img {
+    width: 1.5rem;
+    height: 0 auto;
+    margin-top: .5rem;
 }
