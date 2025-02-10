@@ -42,11 +42,11 @@ function Producto(props) {
 function ShowProductos(props) {
   let Productos = []
   for (let i = 0; i < props.liPro.length; i++) {
-    Productos.push(<Producto 
-      img={props.liPro[i].imagen} 
-      nombre={props.liPro[i].nombre} 
-      texto={props.liPro[i].texto} 
-      comprar={(nombre, id) => props.comprar(nombre, id)} 
+    Productos.push(<Producto
+      img={props.liPro[i].imagen}
+      nombre={props.liPro[i].nombre}
+      texto={props.liPro[i].texto}
+      comprar={(nombre, id) => props.comprar(nombre, id)}
       id={props.liPro[i].id} />)
   }
   return (
@@ -91,25 +91,30 @@ const VentanaModal = (props) => {
 
   useEffect(() => {
     if (!props.mostrar) {
-      setVerAlerta(false); 
+      setVerAlerta(false);
       setmsgAlerta("");
     }
   }, [props.mostrar]);
 
-  const pedir = (array, totalPro, totalPre) => {
+  const validarDatos = () => {
     if (nombre === undefined || apellido === undefined || telefono === undefined || direccion === undefined) {
       setVerAlerta(true)
       setcolorAlerta("danger")
       setmsgAlerta('Campos vacios o erroneos')
+    } else if (props.carro.length < 1) {
+      setVerAlerta(true)
+      setcolorAlerta("warning")
+      setmsgAlerta('Carrito vacio!!')
     } else {
-      let idPedido = array.length ? array[array.length - 1].id + 1 : 1;
-      let infoPedido = <p>{"Pedido nº:"+idPedido+"  Pedido por: "+nombre+" "+apellido+ "  Productos: "+totalPro+"  Pecio: "+totalPre+ "€"}</p>
-      array.push({id: idPedido , info: infoPedido})
+      props.pedir()
       setVerAlerta(true)
       setcolorAlerta("primary")
       setmsgAlerta('Pedido hecho con exito')
     }
+
   }
+
+
 
   return (
     <div>
@@ -117,12 +122,12 @@ const VentanaModal = (props) => {
         <ModalHeader toggle={props.toggle}>CARRITO DE LA COMPRA</ModalHeader>
         <ModalBody>
           {props.carro.map(p => {
-            return (<p>{p.nombre + " - " + p.numero + " - " + p.precio + "€" } 
-            {"  "} 
-            {<Button onClick={() => props.resta(p.id, p.precio)}>-</Button>}
-            {<Button onClick={() => props.suma(p.id, p.precio)}>+</Button>}</p>)
+            return (<p>{p.nombre + " - " + p.cantidad + " - " + p.precio + "€"}
+              {"  "}
+              {<Button onClick={() => props.resta(p.id, p.precio)}>-</Button>}
+              {<Button onClick={() => props.suma(p.id, p.precio)}>+</Button>}</p>)
           })}
-          {"Total: " + props.totalPrecio()+ "€"}
+          {"Total: " + props.totalPrecio() + "€"}
           <FormGroup row>
             <Label sm={2} > Nombre: </Label>
             <Col sm={10}>
@@ -162,7 +167,7 @@ const VentanaModal = (props) => {
           <Alert isOpen={verAlerta} color={colorAlerta}>{msgAlerta}</Alert>
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={() => pedir(props.pedidos, props.totalProductos(), props.totalPrecio())}>PEDIR</Button>
+          <Button color='primary' onClick={() => validarDatos()}>PEDIR</Button>
           <Button color='primary' onClick={() => props.toggle()}>CERRAR</Button>
         </ModalFooter>
       </Modal>
@@ -175,16 +180,38 @@ const VentanaModalPedidos = (props) => {
 
   return (
     <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
-      <ModalHeader toggle={props.toggle}>HISTORIAL DE PEDIDOS</ModalHeader>
+      <ModalHeader toggle={props.toggle}>📦 HISTORIAL DE PEDIDOS</ModalHeader>
       <ModalBody>
-        {props.pedidos.map(p => p.info)}
+        {(props.pedidos.map((pe) => (
+            <Card key={pe.id}>
+              <CardBody>
+                <CardTitle tag="h5">🛒 Pedido #{pe.id}</CardTitle>
+                <p><strong>Productos:</strong></p>
+                <ul>
+                  {pe.productos.map((prod, index) => (
+                    <li key={index}>
+                      <div>
+                        <strong>{prod.nombre}</strong> <br />
+                        Cantidad: {prod.cantidad} - {prod.precio}€
+                      </div>
+                      <img src={prod.imagen} alt={prod.nombre} width="50" />
+                    </li>
+                  ))}
+                </ul>
+                <p><strong>Total:</strong>{pe.precioTotal}€</p>
+              </CardBody>
+            </Card>
+          ))
+        )}
       </ModalBody>
       <ModalFooter>
-        <Button color='primary' onClick={() => props.toggle()}>CERRAR</Button>
+        <Button color="secondary" onClick={props.toggle}>Cerrar</Button>
       </ModalFooter>
     </Modal>
-  )
-}
+  );
+};
+
+
 
 class App extends Component {
   constructor(props) {
@@ -198,28 +225,48 @@ class App extends Component {
   }
 
   toggleModal() {
-    this.setState({isOpen: !this.state.isOpen})
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   toggleModal2() {
     this.setState({ isOpen2: !this.state.isOpen2 })
   }
 
+  pedir() {
+    let auxPedidos = this.state.pedidos
+    let auxCarrito = this.state.carrito
+    let idPedido = auxPedidos.length ? auxPedidos[auxPedidos.length - 1].id + 1 : 1;
+    let productosPedido = []
+
+    auxCarrito.map(p => {
+      if (p.cantidad > 0) {
+        productosPedido.push(p)
+      }
+    })
+
+    auxPedidos.push({ id: idPedido, productos: productosPedido, precioTotal: this.totalPrecio() })
+
+    this.setState({ pedidos: auxPedidos })
+
+    console.log(this.state.pedidos)
+
+    this.vaciarCarrito()
+  }
+
   Comprar(nombre, id) {
     let auxCarrito = this.state.carrito;
     let precio = this.state.listaProductos.find(p => p.id === id).precio
+    let img = this.state.listaProductos.find(p => p.id === id).imagen
 
     let existe = auxCarrito.filter(p => p.id === id).length
     if (existe === 0) {
-      let producto = { id: id, nombre: nombre, numero: 1, precio: precio}
+      let producto = { id: id, nombre: nombre, cantidad: 1, precio: precio, imagen:img }
       auxCarrito.push(producto)
     } else {
       auxCarrito.map(p => {
         if (p.id === id) {
-          p.numero += 1
+          p.cantidad += 1
           p.precio += precio
-          console.log(precio)
-          console.log(p.precio)
         }
       })
     }
@@ -233,7 +280,7 @@ class App extends Component {
 
     auxCarrito.map(p => {
       if (p.id === id) {
-        p.numero += 1
+        p.cantidad += 1
         p.precio += precio
       }
     })
@@ -247,11 +294,11 @@ class App extends Component {
 
     auxCarrito = auxCarrito.map(p => {
       if (p.id === id) {
-        if (p.numero > 0) {
-          p.numero -= 1;
+        if (p.cantidad > 0) {
+          p.cantidad -= 1;
           p.precio -= precio
         }
-        if (p.numero === 0) {
+        if (p.cantidad === 0) {
           return null;
         }
       }
@@ -265,21 +312,26 @@ class App extends Component {
     let total = 0;
 
     this.state.carrito.map(p => {
-      total += p.numero
+      total += p.cantidad
     })
 
     return (total)
   }
 
-  totalPrecio(){
+  totalPrecio() {
     let total = 0;
 
     this.state.carrito.map(p => {
       total += p.precio
-   })
+    })
 
-   return(total)
+    return (total)
   }
+
+  vaciarCarrito() {
+    this.setState({ carrito: [] });
+  }
+
 
   render() {
     return (
@@ -293,9 +345,8 @@ class App extends Component {
           carro={this.state.carrito}
           resta={(id) => this.resta(id)}
           suma={(id) => this.suma(id)}
-          pedidos={this.state.pedidos}
-          totalProductos={() => this.totalEnCarrito()}
           totalPrecio={() => this.totalPrecio()}
+          pedir={() => this.pedir()}
         />
 
         <VentanaModalPedidos
