@@ -17,7 +17,7 @@ if(isset($_SESSION["token"]))
 {
     require "src/seguridad.php";
 
-    if($datos_usuario_log["tipo"]=="alumno")
+    if($datos_usu_log["tipo"]=="alumno")
         require "vistas/vista_normal.php";
     else
     {
