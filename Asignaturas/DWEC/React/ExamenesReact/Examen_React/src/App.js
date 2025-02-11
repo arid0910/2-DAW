@@ -1,5 +1,5 @@
 import { Component, useState, useEffect } from 'react'
-import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Col, Label, FormGroup, Alert } from 'reactstrap';
+import { Table, Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Col, Label, FormGroup, Alert, CardGroup } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const PIELES = [
@@ -50,10 +50,76 @@ function ShowProductos(props) {
       id={props.liPro[i].id} />)
   }
   return (
-    <>
+    <CardGroup>
       {Productos.map(p => p)}
-    </>
+    </CardGroup>
 
+  )
+}
+
+const VentanaLogin = (props) => {
+  const { className } = props;
+
+  const [usuario, setUsuario] = useState();
+  const [clave, setClave] = useState();
+
+  const [verAlerta, setVerAlerta] = useState(false)
+  const [msgAlerta, setmsgAlerta] = useState()
+  const [colorAlerta, setcolorAlerta] = useState()
+
+  const validarDatos = () => {
+    if (usuario === undefined || clave === undefined) {
+      setVerAlerta(true)
+      setcolorAlerta("danger")
+      setmsgAlerta('Campos vacios')
+    } else {
+      props.login(usuario, clave)
+      setVerAlerta(true)
+      setcolorAlerta("primary")
+      setmsgAlerta('Login hecho con exito')
+    }
+  }
+
+  const handleChange = (event) => {
+    let target = event.target;
+
+    if (target.name === "usuario") {
+      setUsuario(target.value)
+    }
+
+    if (target.name === "clave") {
+      setClave(target.value)
+    }
+  }
+  return (
+    <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
+      <ModalHeader toggle={props.toggle}>LOGIN</ModalHeader>
+      <ModalBody>
+        <FormGroup row>
+          <Label sm={2} > Usuario: </Label>
+          <Col sm={10}>
+            <Input onChange={handleChange}
+              id="usuario"
+              name="usuario"
+              type="Text" />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label sm={2} > Clave: </Label>
+          <Col sm={10}>
+            <Input onChange={handleChange}
+              id="clave"
+              name="clave"
+              type="password" />
+          </Col>
+        </FormGroup>
+        <Alert isOpen={verAlerta} color={colorAlerta}>{msgAlerta}</Alert>
+      </ModalBody>
+      <ModalFooter>
+        <Button color='secondary' onClick={() => props.toggle()}>Cerrar</Button>
+        <Button color='primary' onClick={() => validarDatos()}>Login</Button>
+      </ModalFooter>
+    </Modal>
   )
 }
 
@@ -62,7 +128,6 @@ const VentanaModal = (props) => {
 
   const [nombre, setNombre] = useState()
   const [apellido, setApellido] = useState();
-  const [telefono, setTelefono] = useState();
   const [direccion, setDireccion] = useState();
 
   const [verAlerta, setVerAlerta] = useState(false)
@@ -80,10 +145,6 @@ const VentanaModal = (props) => {
       setApellido(target.value)
     }
 
-    if (target.name === "telefono") {
-      setTelefono(target.value)
-    }
-
     if (target.name === "direccion") {
       setDireccion(target.value)
     }
@@ -97,7 +158,7 @@ const VentanaModal = (props) => {
   }, [props.mostrar]);
 
   const validarDatos = () => {
-    if (nombre === undefined || apellido === undefined || telefono === undefined || direccion === undefined) {
+    if (nombre === undefined || apellido === undefined || direccion === undefined) {
       setVerAlerta(true)
       setcolorAlerta("danger")
       setmsgAlerta('Campos vacios o erroneos')
@@ -113,9 +174,6 @@ const VentanaModal = (props) => {
     }
 
   }
-
-
-
   return (
     <div>
       <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
@@ -147,15 +205,6 @@ const VentanaModal = (props) => {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label sm={2} > Teléfono: </Label>
-            <Col sm={10}>
-              <Input onChange={handleChange}
-                id="telefono"
-                name="telefono"
-                type="number" />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
             <Label sm={2} > Dirección: </Label>
             <Col sm={10}>
               <Input onChange={handleChange}
@@ -180,38 +229,49 @@ const VentanaModalPedidos = (props) => {
 
   return (
     <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
-      <ModalHeader toggle={props.toggle}>📦 HISTORIAL DE PEDIDOS</ModalHeader>
+      <ModalHeader toggle={props.toggle}>HISTORIAL DE PEDIDOS</ModalHeader>
       <ModalBody>
-        {(props.pedidos.map((pe) => (
-            <Card key={pe.id}>
-              <CardBody>
-                <CardTitle tag="h5">🛒 Pedido #{pe.id}</CardTitle>
-                <p><strong>Productos:</strong></p>
-                <ul>
-                  {pe.productos.map((prod, index) => (
-                    <li key={index}>
-                      <div>
-                        <strong>{prod.nombre}</strong> <br />
-                        Cantidad: {prod.cantidad} - {prod.precio}€
-                      </div>
-                      <img src={prod.imagen} alt={prod.nombre} width="50" />
-                    </li>
-                  ))}
-                </ul>
-                <p><strong>Total:</strong>{pe.precioTotal}€</p>
-              </CardBody>
-            </Card>
-          ))
-        )}
+        {props.pedidos.map((pe, index) => (
+          <div key={index}>
+            <h3>Pedido: {pe.id}</h3>
+            <Table hover responsive>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pe.productos.map((pro, index) => (
+                  <tr key={index}>
+                    <th>{pro.id}</th>
+                    <td>{pro.nombre}</td>
+                    <td>{pro.cantidad}</td>
+                    <td>{pro.precio}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+            <Table bordered>
+              <tbody>
+                <tr>
+                  <th>Total</th>
+                  <td>{pe.precioTotal}€</td>
+                </tr>
+              </tbody>
+            </Table>
+            <hr />
+          </div>
+        ))}
       </ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={props.toggle}>Cerrar</Button>
       </ModalFooter>
     </Modal>
   );
-};
-
-
+}
 
 class App extends Component {
   constructor(props) {
@@ -220,7 +280,10 @@ class App extends Component {
     this.state = {
       listaProductos: PIELES,
       carrito: [],
-      pedidos: []
+      pedidos: [],
+      usuarios: [{ usuario: "admin1", clave: "123456", tipo: "admin" }, { usuario: "normal1", clave: "123456", tipo: "normal" }],
+      logueado: true,
+
     };
   }
 
@@ -230,6 +293,24 @@ class App extends Component {
 
   toggleModal2() {
     this.setState({ isOpen2: !this.state.isOpen2 })
+  }
+
+  toggleModal3() {
+    this.setState({ isOpen3: !this.state.isOpen3 })
+  }
+
+  login(usuario, clave) {
+    let auxLog = this.state.logueado
+
+    auxLog = true
+
+    this.state.usuarios.map(u => {
+      if (u.usuario === usuario && u.clave === clave && u.tipo === "admin") {
+        auxLog = false
+      }
+    })
+
+    this.setState({ logueado: auxLog })
   }
 
   pedir() {
@@ -260,7 +341,7 @@ class App extends Component {
 
     let existe = auxCarrito.filter(p => p.id === id).length
     if (existe === 0) {
-      let producto = { id: id, nombre: nombre, cantidad: 1, precio: precio, imagen:img }
+      let producto = { id: id, nombre: nombre, cantidad: 1, precio: precio, imagen: img }
       auxCarrito.push(producto)
     } else {
       auxCarrito.map(p => {
@@ -337,8 +418,11 @@ class App extends Component {
     return (
       <>
         <Button color='primary' onClick={() => this.toggleModal()}>Carrito({this.totalEnCarrito()})</Button>
-        <Button color='primary' onClick={() => this.toggleModal2()}>Pedidos</Button>
+        <Button hidden={this.state.logueado} color='primary' onClick={() => this.toggleModal2()}>Pedidos</Button>
+        <Button color='primary' onClick={() => this.toggleModal3()}>Login</Button>
+
         <ShowProductos liPro={this.state.listaProductos} comprar={(nombre, id) => this.Comprar(nombre, id)} />
+
         <VentanaModal
           mostrar={this.state.isOpen}
           toggle={() => this.toggleModal()}
@@ -353,6 +437,12 @@ class App extends Component {
           mostrar={this.state.isOpen2}
           toggle={() => this.toggleModal2()}
           pedidos={this.state.pedidos}
+        />
+
+        <VentanaLogin
+          mostrar={this.state.isOpen3}
+          toggle={() => this.toggleModal3()}
+          login={(usuario, clave) => this.login(usuario, clave)}
         />
       </>
     );
