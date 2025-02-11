@@ -1,20 +1,27 @@
 <?php
 
-require "src/funciones_servicios.php";
 require __DIR__ . '/Slim/autoload.php';
 
-$app= new \Slim\App;
+require "src/funciones_servicios.php";
 
+$app = new \Slim\App;
 
+$app->get('/logueado', function () {
 
-$app->get('/conexion_PDO',function($request){
-
-    echo json_encode(conexion_pdo());
+    $test = validateToken();
+    if (is_array($test)) {
+        echo json_encode($test);
+    } else
+        echo json_encode(array("no_auth" => "No tienes permiso para usar el servicio"));
 });
 
-$app->get('/conexion_MYSQLI',function($request){
-    
-    echo json_encode(conexion_mysqli());
+
+$app->post('/login', function ($request) {
+
+    $usuario= $request->getParam("usuario");
+    $clave = $request->getParam("clave");
+
+    echo json_encode(login($usuario, $clave));
 });
 
 

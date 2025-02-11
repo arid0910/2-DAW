@@ -1,5 +1,5 @@
 <?php
-define("DIR_SERV","http://localhost/Proyectos/Examen_SW_24_25/API_libreria");
+define("DIR_SERV","http://localhost/2DAW/Proyectos/2Trim/Servicios_Web/Examen4_SW/servicios_rest");
 define("MINUTOS",2);
 
 function consumir_servicios_REST($url,$metodo,$datos=null)
@@ -14,7 +14,7 @@ function consumir_servicios_REST($url,$metodo,$datos=null)
     curl_close($llamada);
     return $respuesta;
 }
-
+ 
 
 function consumir_servicios_JWT_REST($url,$metodo,$headers,$datos=null)
 {

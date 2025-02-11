@@ -1,9 +1,8 @@
 <?php
-
 $headers[]="Authorization: Bearer ".$_SESSION["token"];
 $url=DIR_SERV."/logueado";
 $respuesta=consumir_servicios_JWT_REST($url,"GET",$headers);
-$json_respuesta=json_decode($respuesta,true);
+$json_respuesta=json_decode($respuesta,true); 
 if(!$json_respuesta)
 {
      session_destroy();
