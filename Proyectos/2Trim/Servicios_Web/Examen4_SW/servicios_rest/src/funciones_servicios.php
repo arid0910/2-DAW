@@ -1,4 +1,8 @@
 <?php
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 require "config_bd.php";
 
 function conexion_pdo()
@@ -19,7 +23,6 @@ function conexion_pdo()
 
 function conexion_mysqli()
 {
-  
     try
     {
         $conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
