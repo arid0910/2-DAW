@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+	    <title>Método animate jQuery</title>
+	    <meta charset="utf-8">
+	    <style type="text/css">
+	    	h1{border-bottom: 1px solid #ff8800; font-size: 1.2rem;}
+	    </style>
+	    <script src="jq/jquery-3.7.1.min.js"></script>
+		<script src="jq/jquery.animate-colors-min.js"></script>
+		<script>
+		$(function(){
+			$("#animar").on("click", function(e){
+				e.preventDefault()
+				$("h1").animate({
+					'border-bottom-width': "2.5rem",
+					'font-size': '3rem'
+				}).animate({
+					'border-bottom-width': "1",
+					'font-size': '1.2rem'
+				});
+			});
+		})
+		</script>
+	</head>
+	<body>
+	    <h1>Animacion jQuery</h1>
+		<a href="#" id="animar"> Animar </a>
+	</body>
+</html>
+
+

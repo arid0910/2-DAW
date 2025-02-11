@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main > article {
+    display: flex;
+    flex-flow: column;
+    margin: 2rem;
+    width: 30rem;
+}
+
+main > article > h2 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #000000;
+    margin: 0;
+    padding: 3rem 2rem;
+}
+
+main > article > picture {
+    border: 1px solid #bbbbbb;
+}
+
+main > article > p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+main > article > picture > img {
+    width: 100%;
+    height: auto;
+}
+
+main > article > div {
+    border-top: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+}
+
+
+main > article > div > section > div {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid #bbbbbb;
+    align-items: center;
+}
+
+main > article > div > section > div > h2 {
+    margin: 0;
+    font-weight: 600;
+    color: #777777;
+}
+
+main > article > div > section > div > div {
+    position: relative;
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+}
+
+main > article > div >section > div > div > svg {
+    fill:#999999;
+    position: absolute;
+    top: 8px;
+}
+
+main > article > div >section > div > div > svg:nth-child(2) {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+main > article > div > section > div.texto {
+    flex-flow: column;
+    border-bottom: 1px solid #bbbbbb;
+    background-color: #eeeeee;
+    color: #555555;
+}
