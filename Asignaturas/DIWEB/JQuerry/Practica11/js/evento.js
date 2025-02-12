@@ -6,4 +6,4 @@ $(function () {
         // $(this).children().children().next().toggle()
         $(this).find("svg:nth-child(2)").toggle()
     })
-})
+}) 

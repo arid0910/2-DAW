@@ -39,6 +39,23 @@
 			}
 		})
 	</script>
+	<script>
+		$(function () {
+			let menuVisible = false;
+	
+			$("#svg-menu").on("click", function () {
+				menuVisible = !menuVisible;
+				$("nav#main-menu > ul").toggle(menuVisible);
+			});
+	
+			$(window).on("resize", function () {
+				if (menuVisible) {
+					$("nav#main-menu > ul").hide();
+					menuVisible = false
+				}
+			});
+		});
+	</script>
 	<!DOCTYPE html>
 	<html lang="es">
 
@@ -80,23 +97,6 @@
 	</head>
 
 	<body>
-		<script>
-			$(function () {
-				let menuVisible = false;
-
-				$("#svg-menu").on("click", function () {
-					menuVisible = !menuVisible;
-					$("nav#main-menu > ul").toggle(menuVisible);
-				});
-
-				$(window).on("resize", function () {
-					if (menuVisible) {
-						$("nav#main-menu > ul").hide();
-						menuVisible = false
-					}
-				});
-			});
-		</script>
 		<div id="content">
 			<header>
 				<img src="logo.png" alt="logotipo de la empresa" width="140" height="122" id="logo">
