@@ -99,11 +99,7 @@
         $(function () {
             $("#email").on("select", function(){
             let option = $(this).next();
-            option.stop(true).slideToggle()
-
-            setTimeout(function(){ 
-                option.stop(true).slideToggle()
-            }, 1500)
+            option.stop(true).delay(1000).slideToggle()
            })
 
            $("#met-contacto").on("change", function(){
@@ -111,7 +107,7 @@
             if(valor === ""){
                 $("#info-contacto").stop(true).slideToggle()
             } else {
-                $("#info-contacto").text("Vamos a contactar con usted por " + valor).stop(true).slideToggle()
+                $("#info-contacto").text("Vamos a contactar con usted por " + valor).stop(true).slideToggle().delay(1000)
             }
            })
 
