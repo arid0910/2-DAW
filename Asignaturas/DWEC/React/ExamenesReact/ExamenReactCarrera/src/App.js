@@ -93,10 +93,11 @@ const Mostrar = (props) => {
     } else if (props.liCorredores[i].posicion === ultimo) {
       boton = <Button onClick={() => props.up(props.liCorredores[i].posicion)}>UP</Button>;
     } else {
-      boton = <>
-        <Button onClick={() => props.up(props.liCorredores[i].posicion)}>UP</Button>
-        <Button onClick={() => props.down(props.liCorredores[i].posicion)}>DOWN</Button>
-      </>;
+      boton =
+        <>
+          <Button onClick={() => props.up(props.liCorredores[i].posicion)}>UP</Button>
+          <Button onClick={() => props.down(props.liCorredores[i].posicion)}>DOWN</Button>
+        </>;
     }
 
     aux.push(<tr>
@@ -154,30 +155,41 @@ class App extends Component {
 
   down(id) {
     let auxLi = this.state.listaCorredores
-    let tamaño =  auxLi.length
+    let tamaño = auxLi.length
     for (let i = 0; i < tamaño; i++) {
-     if(auxLi[i].posicion === id){
-      let aux = auxLi[i]
-      auxLi[i] = auxLi[i+1]
-      auxLi[i+1] = aux
-     }
+      if (auxLi[i].posicion === id && i < auxLi.length - 1) {
+        let auxNom = auxLi[i].nombre;
+        let auxEqui = auxLi[i].equipo;
+
+        auxLi[i].nombre = auxLi[i + 1].nombre;
+        auxLi[i].equipo = auxLi[i + 1].equipo;
+
+        auxLi[i + 1].nombre = auxNom;
+        auxLi[i + 1].equipo = auxEqui;
+      }
+
     }
 
-    this.setState({listaCorredores:auxLi})
+    this.setState({ listaCorredores: auxLi })
   }
 
   up(id) {
     let auxLi = this.state.listaCorredores
-    let tamaño =  auxLi.length
+    let tamaño = auxLi.length
     for (let i = 0; i < tamaño; i++) {
-     if(auxLi[i].posicion === id){
-      let aux = auxLi[i]
-      auxLi[i] = auxLi[i-1]
-      auxLi[i-1] = aux
-     }
+      if (auxLi[i].posicion === id && i < auxLi.length - 1) {
+        let auxNom = auxLi[i].nombre;
+        let auxEqui = auxLi[i].equipo;
+
+        auxLi[i].nombre = auxLi[i + 1].nombre;
+        auxLi[i].equipo = auxLi[i + 1].equipo;
+
+        auxLi[i + 1].nombre = auxNom;
+        auxLi[i + 1].equipo = auxEqui;
+      }
     }
 
-    this.setState({listaCorredores:auxLi})
+    this.setState({ listaCorredores: auxLi })
   }
 
   render() {
