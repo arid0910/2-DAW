@@ -181,11 +181,11 @@ class App extends Component {
         let auxNom = auxLi[i].nombre;
         let auxEqui = auxLi[i].equipo;
 
-        auxLi[i].nombre = auxLi[i + 1].nombre;
-        auxLi[i].equipo = auxLi[i + 1].equipo;
+        auxLi[i].nombre = auxLi[i - 1].nombre;
+        auxLi[i].equipo = auxLi[i - 1].equipo;
 
-        auxLi[i + 1].nombre = auxNom;
-        auxLi[i + 1].equipo = auxEqui;
+        auxLi[i - 1].nombre = auxNom;
+        auxLi[i - 1].equipo = auxEqui;
       }
     }
 
