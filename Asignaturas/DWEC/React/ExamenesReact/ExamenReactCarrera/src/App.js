@@ -177,7 +177,7 @@ class App extends Component {
     let auxLi = this.state.listaCorredores
     let tamaño = auxLi.length
     for (let i = 0; i < tamaño; i++) {
-      if (auxLi[i].posicion === id && i < auxLi.length - 1) {
+      if (auxLi[i].posicion === id && i <= auxLi.length -1) {
         let auxNom = auxLi[i].nombre;
         let auxEqui = auxLi[i].equipo;
 
